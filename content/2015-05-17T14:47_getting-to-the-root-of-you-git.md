@@ -3,7 +3,7 @@ Category: Dev Tools
 Tags: git, bash, util
 Summary: How to quickly cd to the root of your git repository.
 
-```language-bash
+```bash
 function gcd {
   if which git &> /dev/null; then
     STATUS=$(git status 2>/dev/null)
@@ -16,7 +16,7 @@ function gcd {
 }
 ```
 Tab completion!
-```language-bash
+```bash
 function _git_cd {
   if $(which git &> /dev/null); then
     STATUS=$(git status 2>/dev/null)
@@ -39,7 +39,7 @@ function _git_cd {
 }
 ```
 Usage:
-```language-bash
+```bash
 ls -d .git  # <- we're in the root
 mkdir -p a/b/c d/e/f
 cd a/b/c

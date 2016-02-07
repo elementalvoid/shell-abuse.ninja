@@ -5,7 +5,7 @@ Summary: Create a ring buffer of packet captures on a VoIP/SIP server.
 
 When filing issues with my SIP trunk provider they usually want some sort of call record to help track/troubleshoot the issue. In my case I don't have any eavesdropping concerns as all the calls are with family members. So, I use tshark to grab a ring buffer of RTP/SIP data as follows:
 
-```language-bash
+```bash
 # ensure that the dumpcap binary has the proper Linux capabilities
 /sbin/setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip'
 
@@ -29,13 +29,13 @@ The filter comes straight from the Freeswitch wiki page on [packet capturing](ht
 Of course all of that is wrapped up in a service script that starts/stops the capture and performs tool installation and cron-based cleanup.
 
 Since this creates multiple reasonably sized capture files I generally need to merge some in order to filter on the correct time range:
-```language-bash
+```bash
 # create a single file for all of 20150804
 mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
 ```
 
 To build a list of all SIP BYE messages:
-```language-bash
+```bash
 tshark \
  -n \ # Disable network object name resolution
  -N nN \ # Turn on name resolving only for network address resolution using external resolvers (e.g., DNS)

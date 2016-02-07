@@ -4,7 +4,7 @@ Tags: docker, git,
 Summary: Wouldn't it be nice if you could run `docker compose` instead of `docker-compose`? What about Docker Machine? You can!
 
 Wouldn't it be nice if you could run `docker compose` instead of `docker-compose`? What about Docker Machine? You can!
-```language-bash
+```bash
 docker () {
   local cmd=$(command -v docker-${1});
   if [[ -n ${cmd} ]]; then
@@ -17,7 +17,7 @@ docker () {
 ```
 
 Throw that in your shell rc somewhere and then...
-```language-bash
+```bash
 docker compose ps  # <-- instead of 'docker-compose ps'
        Name                      Command               State                    Ports
 -------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ dockerghost_nginx_1   /usr/bin/reefer -t /templa ...   Up      0.0.0.0:443->443/
 ```
 ---
 Create your own commands - yours should be a little less pointless.
-```language-bash
+```bash
 # Create a custom docker wrapper
 docker-foo () { echo ' :: Hi there! ::'; }
 # And run it

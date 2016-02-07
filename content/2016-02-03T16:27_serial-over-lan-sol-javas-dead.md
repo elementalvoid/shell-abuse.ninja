@@ -54,7 +54,7 @@ And start it: `service ttyS1 start`.
 I'm not sure what this would look like for Debian. Stupid Ubuntu I’m on is using upstart.
 
 Install and configure `ipmitool`.
-```language-bash
+```bash
 apt-get install ipmitool
 ipmitool sol set non-volatile-bit-rate 115.2 1
 ipmitool sol set volatile-bit-rate 115.2 1
@@ -62,7 +62,7 @@ ipmitool sol set volatile-bit-rate 115.2 1
 
 ## What's the point if you can't use it?
 On a Mac with brew.sh installed and functioning:
-```language-bash
+```bash
 brew install freeipmi
 # -P prompts for the password
 # -e '~' sets the escape character to match SSH's
