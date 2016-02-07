@@ -36,6 +36,7 @@ MENUITEMS = (
 
 FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2})_(?P<slug>.*)'
 
+STATIC_PATHS = ['images', 'extra/CNAME']
 EXTRA_PATH_METADATA = {
     'images/favicon.ico': {'path': 'favicon.ico'},
     'extra/CNAME': {'path': 'CNAME'},
