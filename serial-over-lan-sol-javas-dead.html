@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/css/style.min.css">
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/css/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/css/font-awesome.min.css">
+  <link href="http://localhost:8000/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+<meta name="author" content="Matt Klich - Chief Abuser" />
+<meta name="description" content="I’ve been a sysadmin and worked with sysadmins for years but we’ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove LAN (SOL) using IPMI. Turns out, its super easy!" />
+<meta name="keywords" content="ipmi, linux, java, sol, remote console, serial over lan">
+<meta property="og:site_name" content="Shell Abuse"/>
+<meta property="og:title" content="Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!"/>
+<meta property="og:description" content="I’ve been a sysadmin and worked with sysadmins for years but we’ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove LAN (SOL) using IPMI. Turns out, its super easy!"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-02-03 16:27:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
+<meta property="article:section" content="Linux"/>
+<meta property="article:tag" content="ipmi"/>
+<meta property="article:tag" content="linux"/>
+<meta property="article:tag" content="java"/>
+<meta property="article:tag" content="sol"/>
+<meta property="article:tag" content="remote console"/>
+<meta property="article:tag" content="serial over lan"/>
+<meta property="og:image" content="/images/elementalvoid-avatar.png">  <title>Shell Abuse &ndash; Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://shell-abuse.ninja">
+        <img src="/images/elementalvoid-avatar.png" alt="" title="">
+      </a>
+      <h1><a href="http://shell-abuse.ninja"></a></h1>
+      <p>Bending the shell to your whim - occasionally with abandon.</p>
+      <nav>
+        <ul class="list">
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/mattklich" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/elementalvoid" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-google" href="https://google.com/+MattKlich" target="_blank"><i class="fa fa-google"></i></a></li>
+        <li><a class="sc-rss" href="//shell-abuse.ninja/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="http://shell-abuse.ninja">Home</a>
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="http://localhost:8000/feeds/all.atom.xml">Atom</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="serial-over-lan-sol-javas-dead">Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!</h1>
+    <p>Posted on Wed 03 February 2016 in <a href="http://shell-abuse.ninja/category/linux.html">Linux</a></p>
+  </header>
+  <div>
+    <p>I&#8217;ve been a sysadmin and worked with sysadmins for years but we&#8217;ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove <span class="caps">LAN</span> (<span class="caps">SOL</span>) using <span class="caps">IPMI</span>. Turns out, its <em>super</em>&nbsp;easy!</p>
+<p>So, I&#8217;ve written up some simple instructions to configure <span class="caps">SOL</span> on Ubuntu Trusty (14.somethingorother). One super important thing to keep in mind is that the bit rates configured at each step need to be the&nbsp;same.</p>
+<p>Assumption: You&#8217;re using sudo liberally or, like my favorite <span class="caps">SA</span>, you just drop into a root shell and stay there.&nbsp;Forever.</p>
+<h2>Bios&nbsp;Redirection</h2>
+<p>These settings allow you to see and manipulate Bios level screens (<span class="caps">POST</span>, Bios settings, <span class="caps">PXE</span> boot,&nbsp;etc.).</p>
+<p>Make sure that the <span class="caps">BIOS</span> has <span class="caps">SOL</span> enabled and set to 115.2K. In my case this was on com2. Note that com2 maps to ttyS1 in&nbsp;Linux.</p>
+<h2>Grub and Linux Kernel Space&nbsp;Redirection</h2>
+<p>These settings allow you to see and manipulate Grub and to see kernel level boot&nbsp;messages.</p>
+<p>Ensure the following are configured in <code>/etc/default/grub</code>:</p>
+<div class="highlight"><pre># Enable kernel space redirection so you can see kernel boot messages.
+GRUB_CMDLINE_LINUX=&quot;console=tty0 console=ttyS1,115200n8&quot;
+
+# Enable Grub to be seen over SOL.
+GRUB_TERMINAL=&quot;serial console&quot;
+
+# Configures Grub&#39;s serial output
+GRUB_SERIAL_COMMAND=&quot;serial --speed=115200 --unit=1 --word=8 --parity=no --stop=1&quot;
+</pre></div>
+
+
+<p>Then run <code>update-grub</code>.</p>
+<h2>Linux User Space&nbsp;Redirection</h2>
+<p>Once the kernel hands things over to user space we need to redirect a virtual terminal to the serial&nbsp;port.</p>
+<p>Create <code>/etc/init/ttyS1.conf</code>.</p>
+<div class="highlight"><pre># ttyS1 - getty
+#
+# This service maintains a getty on ttyS1 from the point the system is
+# started until it is shut down again.
+
+start on stopped rc RUNLEVEL=[12345]
+stop on runlevel [!12345]
+
+respawn
+exec /sbin/getty -L ttyS1 115200 vt102
+</pre></div>
+
+
+<p>And start it: <code>service ttyS1 start</code>.</p>
+<p>I&#8217;m not sure what this would look like for Debian. Stupid Ubuntu I’m on is using&nbsp;upstart.</p>
+<p>Install and configure <code>ipmitool</code>.</p>
+<div class="highlight"><pre>apt-get install ipmitool
+ipmitool sol set non-volatile-bit-rate 115.2 1
+ipmitool sol set volatile-bit-rate 115.2 1
+</pre></div>
+
+
+<h2>What&#8217;s the point if you can&#8217;t use&nbsp;it?</h2>
+<p>On a Mac with brew.sh installed and&nbsp;functioning:</p>
+<div class="highlight"><pre>brew install freeipmi
+# -P prompts for the password
+# -e &#39;~&#39; sets the escape character to match SSH&#39;s
+ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &#39;~&#39;
+</pre></div>
+
+
+<h2>Helpful&nbsp;links:</h2>
+<ul>
+<li>https://wiki.nikhef.nl/grid/Serial_Consoles</li>
+<li>https://help.ubuntu.com/community/SerialConsoleHowto</li>
+<li>http://www.alleft.com/sysadmin/ipmi-sol-inexpensive-remote-console/</li>
+<li>ftp://ftp.supermicro.com/utility/SMCIPMItool/Linux/</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://shell-abuse.ninja/tag/ipmi.html">ipmi</a>
+      <a href="http://shell-abuse.ninja/tag/linux.html">linux</a>
+      <a href="http://shell-abuse.ninja/tag/java.html">java</a>
+      <a href="http://shell-abuse.ninja/tag/sol.html">sol</a>
+      <a href="http://shell-abuse.ninja/tag/remote-console.html">remote console</a>
+      <a href="http://shell-abuse.ninja/tag/serial-over-lan.html">serial over lan</a>
+    </p>
+  </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'shellabuse';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+    <footer>
+        <p>&copy; Matt Klich - Chief Abuser </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57473144', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!",
+  "headline": "Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!",
+  "datePublished": "2016-02-03 16:27:00-07:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Matt Klich - Chief Abuser",
+    "url": "http://shell-abuse.ninja/author/matt-klich-chief-abuser.html"
+  },
+  "image": "/images/elementalvoid-avatar.png",
+  "url": "http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html",
+  "description": "I’ve been a sysadmin and worked with sysadmins for years but we’ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove LAN (SOL) using IPMI. Turns out, its super easy!"
+}
+</script></body>
+</html>

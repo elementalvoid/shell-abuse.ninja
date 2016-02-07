@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://localhost:8000/feeds/dev-tools.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2015-05-17T14:47:00-06:00</updated><entry><title>Getting to the root of your Git</title><link href="http://shell-abuse.ninja/getting-to-the-root-of-you-git.html" rel="alternate"></link><updated>2015-05-17T14:47:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:getting-to-the-root-of-you-git.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;function gcd {
+  if which git &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null; then
+    STATUS=$(git status 2&amp;gt;/dev/null)
+    if [[ -z &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;STATUS&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; ]]; then
+      return
+    fi
+    TARGET=&amp;quot;./$(command git rev-parse --show-cdup)$1&amp;quot;
+    cd &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;TARGET&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+  fi
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Tab&amp;nbsp;completion!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;function _git_cd {
+  if $(which git &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null); then
+    STATUS=$(git status 2&amp;gt;/dev/null)
+    if [[ -z &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;STATUS&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; ]]; then
+      return
+    fi
+    TARGET=&amp;quot;./$(command git rev-parse --show-cdup)&amp;quot;
+    if [[ -d &lt;span class="nv"&gt;$TARGET&lt;/span&gt; ]]; then
+      TARGET=&amp;quot;&lt;span class="nv"&gt;$TARGET&lt;/span&gt;/&amp;quot;
+    fi
+    COMPREPLY=()
+    cur=&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;COMP_WORDS&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;COMP_CWORD&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;
+    prev=&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;COMP_WORDS&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;COMP_CWORD&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;$2&amp;quot;
+    opts=$(cd &lt;span class="nv"&gt;$TARGET&lt;/span&gt;; compgen -d -o dirnames -S / -X &amp;#39;@(*/.git|*/.git/|.git|.git/)&amp;#39; $2)
+    if [[ &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; == * ]]; then
+      COMPREPLY=( $(compgen -W &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; -- &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;) )
+      return 0
+    fi
+  fi
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Usage:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ls &lt;span class="o"&gt;-&lt;/span&gt;d &lt;span class="m"&gt;.&lt;/span&gt;git  &lt;span class="c1"&gt;# &amp;lt;- we&amp;#39;re in the root&lt;/span&gt;
+mkdir &lt;span class="o"&gt;-&lt;/span&gt;p a&lt;span class="o"&gt;/&lt;/span&gt;b&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt; d&lt;span class="o"&gt;/&lt;/span&gt;e&lt;span class="o"&gt;/&lt;/span&gt;f
+cd a&lt;span class="o"&gt;/&lt;/span&gt;b&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;
+gcd d&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;TAB&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="git"></category><category term="bash"></category><category term="util"></category></entry><entry><title>Docker commands - the git way</title><link href="http://shell-abuse.ninja/docker-commands-the-git-way.html" rel="alternate"></link><updated>2015-05-16T22:20:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-16:docker-commands-the-git-way.html</id><summary type="html">&lt;p&gt;Wouldn&amp;#8217;t it be nice if you could run &lt;code&gt;docker compose&lt;/code&gt; instead of &lt;code&gt;docker-compose&lt;/code&gt;? What about Docker Machine? You&amp;nbsp;can!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;docker () {
+  local cmd=$(command -v docker-&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;);
+  if [[ -n &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; ]]; then
+    shift;
+    &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;;
+  else
+    command -p docker -- &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;;
+  fi;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Throw that in your shell rc somewhere and&amp;nbsp;then&amp;#8230;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;docker compose ps  # &amp;lt;-- instead of &amp;#39;docker-compose ps&amp;#39;
+       Name                      Command               State                    Ports
+-------------------------------------------------------------------------------------------------------
+dockerghost_ghost_1   /entrypoint.sh npm start - ...   Up      2368/tcp
+dockerghost_nginx_1   /usr/bin/reefer -t /templa ...   Up      0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:80-&amp;gt;80/tcp
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr /&gt;
+&lt;p&gt;Create your own commands - yours should be a little less&amp;nbsp;pointless.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# Create a custom docker wrapper
+docker-foo () { echo &amp;#39; :: Hi there! ::&amp;#39;; }
+# And run it
+docker foo
+ :: Hi there! ::
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="docker"></category><category term="git"></category></entry></feed>
