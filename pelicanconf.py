@@ -42,6 +42,11 @@ EXTRA_PATH_METADATA = {
     'extra/CNAME': {'path': 'CNAME'},
 }
 
+# Plugins
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['related_posts', 'sitemap']
+# End Plugins
+
 TYPOGRIFY = True
 
 # Blogroll
