@@ -67,52 +67,52 @@
   </header>
   <div>
     <p>When filing issues with my <span class="caps">SIP</span> trunk provider they usually want some sort of call record to help track/troubleshoot the issue. In my case I don&#8217;t have any eavesdropping concerns as all the calls are with family members. So, I use tshark to grab a ring buffer of <span class="caps">RTP</span>/<span class="caps">SIP</span> data as&nbsp;follows:</p>
-<div class="highlight"><pre># ensure that the dumpcap binary has the proper Linux capabilities
-/sbin/setcap &#39;CAP_NET_RAW+eip CAP_NET_ADMIN+eip&#39;
+<div class="highlight"><pre><span class="c1"># ensure that the dumpcap binary has the proper Linux capabilities</span>
+/sbin/setcap <span class="s1">&#39;CAP_NET_RAW+eip CAP_NET_ADMIN+eip&#39;</span>
 
-# Grab SIP and related RTP packets and store them in a ring buffer
-cap_dir=&#39;/var/cache/sip-dump&#39;
-cap_file=<span class="cp">${</span><span class="n">cap_dir</span><span class="cp">}</span>/sip-rtp.pcap
-cap_files=50
-cap_size=51200
+<span class="c1"># Grab SIP and related RTP packets and store them in a ring buffer</span>
+<span class="nv">cap_dir</span><span class="o">=</span><span class="s1">&#39;/var/cache/sip-dump&#39;</span>
+<span class="nv">cap_file</span><span class="o">=</span><span class="si">${</span><span class="nv">cap_dir</span><span class="si">}</span>/sip-rtp.pcap
+<span class="nv">cap_files</span><span class="o">=</span>50
+<span class="nv">cap_size</span><span class="o">=</span>51200
 
-tshark \
- -i eth0 \
- -o &#39;rtp.heuristic_rtp: TRUE&#39; \
- -w <span class="cp">${</span><span class="n">cap_file</span><span class="cp">}</span> \
- -b filesize:<span class="cp">${</span><span class="n">cap_size</span><span class="cp">}</span> \ # Ring
- -b files:<span class="cp">${</span><span class="n">cap_files</span><span class="cp">}</span> \   # Buffer
- &#39;(udp port 5080) or (udp port 5060) or (udp[1] <span class="err">&amp;</span> 1 != 1 <span class="err">&amp;&amp;</span> udp[3] <span class="err">&amp;</span> 1 != 1 <span class="err">&amp;&amp;</span> udp[8] <span class="err">&amp;</span> 0x80 == 0x80 <span class="err">&amp;&amp;</span> length <span class="nt">&lt; 250</span><span class="err">)&#39;</span> <span class="err">\</span>
- <span class="err">2</span><span class="nt">&gt;</span>/dev/null <span class="err">&amp;</span>
+tshark <span class="se">\</span>
+ -i eth0 <span class="se">\</span>
+ -o <span class="s1">&#39;rtp.heuristic_rtp: TRUE&#39;</span> <span class="se">\</span>
+ -w <span class="si">${</span><span class="nv">cap_file</span><span class="si">}</span> <span class="se">\</span>
+ -b filesize:<span class="si">${</span><span class="nv">cap_size</span><span class="si">}</span> <span class="se">\ </span><span class="c1"># Ring</span>
+ -b files:<span class="si">${</span><span class="nv">cap_files</span><span class="si">}</span> <span class="se">\ </span>  <span class="c1"># Buffer</span>
+ <span class="s1">&#39;(udp port 5080) or (udp port 5060) or (udp[1] &amp; 1 != 1 &amp;&amp; udp[3] &amp; 1 != 1 &amp;&amp; udp[8] &amp; 0x80 == 0x80 &amp;&amp; length &lt; 250)&#39;</span> <span class="se">\</span>
+ 2&gt;/dev/null <span class="p">&amp;</span>
 </pre></div>
 
 
 <p>The filter comes straight from the Freeswitch wiki page on <a href="https://freeswitch.org/confluence/display/FREESWITCH/Packet+Capture#PacketCapture-tsharkakatethereal">packet capturing</a>.</p>
 <p>Of course all of that is wrapped up in a service script that starts/stops the capture and performs tool installation and cron-based&nbsp;cleanup.</p>
 <p>Since this creates multiple reasonably sized capture files I generally need to merge some in order to filter on the correct time&nbsp;range:</p>
-<div class="highlight"><pre># create a single file for all of 20150804
+<div class="highlight"><pre><span class="c1"># create a single file for all of 20150804</span>
 mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
 </pre></div>
 
 
 <p>To build a list of all <span class="caps">SIP</span> <span class="caps">BYE</span>&nbsp;messages:</p>
-<div class="highlight"><pre>tshark \
- <span class="o">-</span>n \ <span class="c1"># Disable network object name resolution</span>
- <span class="o">-</span>N nN \ <span class="c1"># Turn on name resolving only for network address resolution using external resolvers (e.g., DNS)</span>
- <span class="o">-</span>W n \ <span class="c1"># save host name resolution records along with captured packets.</span>
- <span class="o">-</span>Y <span class="s">&#39;sip.Method == &quot;BYE&quot;&#39;</span> \ <span class="c1"># display filter - only show SIP BYEs</span>
- <span class="o">-</span>t ad \ <span class="c1"># timestamp format: absolute with date</span>
- <span class="o">-</span><span class="bp">T</span> fields \ <span class="c1"># Output format (print fields given with &#39;-e&#39;)</span>
- <span class="o">-</span>E header<span class="o">=</span>y \ <span class="c1"># print headers</span>
- <span class="o">-</span>e frame.number \ <span class="c1"># Field: Ethernet frame number</span>
- <span class="o">-</span>e frame.time \ <span class="c1"># Field: Ethernet frame timestamp</span>
- <span class="o">-</span>e ip.src_host \ <span class="c1"># Field: source ip</span>
- <span class="o">-</span>e ip.dst_host \ <span class="c1"># Field: destination ip</span>
- <span class="o">-</span>e sip.To \ <span class="c1"># Field: Who&#39;s being called</span>
- <span class="o">-</span>e sip.From \ <span class="c1"># Field: Who&#39;s calling</span>
- <span class="o">-</span>e sip.Reason \ <span class="c1"># Field: Why did we hangup</span>
- <span class="o">-</span>r all.pcapng \ <span class="c1"># which pcap to read from</span>
-<span class="o">|</span> column <span class="o">-</span>t <span class="o">-</span>s<span class="s">&#39;   &#39;</span> <span class="c1">#make it pretty &lt;- that&#39;s a tab character</span>
+<div class="highlight"><pre>tshark <span class="se">\</span>
+ -n <span class="se">\ </span><span class="c1"># Disable network object name resolution</span>
+ -N nN <span class="se">\ </span><span class="c1"># Turn on name resolving only for network address resolution using external resolvers (e.g., DNS)</span>
+ -W n <span class="se">\ </span><span class="c1"># save host name resolution records along with captured packets.</span>
+ -Y <span class="s1">&#39;sip.Method == &quot;BYE&quot;&#39;</span> <span class="se">\ </span><span class="c1"># display filter - only show SIP BYEs</span>
+ -t ad <span class="se">\ </span><span class="c1"># timestamp format: absolute with date</span>
+ -T fields <span class="se">\ </span><span class="c1"># Output format (print fields given with &#39;-e&#39;)</span>
+ -E <span class="nv">header</span><span class="o">=</span>y <span class="se">\ </span><span class="c1"># print headers</span>
+ -e frame.number <span class="se">\ </span><span class="c1"># Field: Ethernet frame number</span>
+ -e frame.time <span class="se">\ </span><span class="c1"># Field: Ethernet frame timestamp</span>
+ -e ip.src_host <span class="se">\ </span><span class="c1"># Field: source ip</span>
+ -e ip.dst_host <span class="se">\ </span><span class="c1"># Field: destination ip</span>
+ -e sip.To <span class="se">\ </span><span class="c1"># Field: Who&#39;s being called</span>
+ -e sip.From <span class="se">\ </span><span class="c1"># Field: Who&#39;s calling</span>
+ -e sip.Reason <span class="se">\ </span><span class="c1"># Field: Why did we hangup</span>
+ -r all.pcapng <span class="se">\ </span><span class="c1"># which pcap to read from</span>
+<span class="p">|</span> column -t -s<span class="s1">&#39;   &#39;</span> <span class="c1">#make it pretty &lt;- that&#39;s a tab character</span>
 </pre></div>
 
 
@@ -127,6 +127,12 @@ mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
       <a href="http://shell-abuse.ninja/tag/networking.html">networking</a>
     </p>
   </div>
+    <footer>
+      <h4>Related posts:</h4>
+      <ul>
+        <li><a href="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html"><span class="caps">IP</span> address associated with the default&nbsp;route</a></li>
+      </ul>
+    </footer>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';

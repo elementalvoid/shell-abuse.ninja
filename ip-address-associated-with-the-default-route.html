@@ -68,10 +68,10 @@
   <div>
     <p>Need a way to determine the <span class="caps">IP</span> address which would be used for outbound communication without actually making any outbound connections? Here&#8217;s one&nbsp;method.</p>
 <p>Tested on Debian, CoreOS, CentOS, and <span class="caps">OSX</span>&nbsp;Yosemite.</p>
-<div class="highlight"><pre>ifconfig $(
-  { route get 4.2.2.2 || route -n; } 2&gt;/dev/null | \
-    awk &#39;/UG/ {print $8}; /interface:/ {print $2}&#39; | head -n 1
-) | awk &#39;/inet / {print $2}&#39; | sed -e &#39;s/addr://&#39;
+<div class="highlight"><pre>ifconfig <span class="k">$(</span>
+  <span class="o">{</span> route get 4.2.2.2 <span class="o">||</span> route -n<span class="p">;</span> <span class="o">}</span> 2&gt;/dev/null <span class="p">|</span> <span class="se">\</span>
+    awk <span class="s1">&#39;/UG/ {print $8}; /interface:/ {print $2}&#39;</span> <span class="p">|</span> head -n 1
+<span class="k">)</span> <span class="p">|</span> awk <span class="s1">&#39;/inet / {print $2}&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/addr://&#39;</span>
 </pre></div>
   </div>
   <div class="tag-cloud">
@@ -83,6 +83,14 @@
       <a href="http://shell-abuse.ninja/tag/ifconfig.html">ifconfig</a>
     </p>
   </div>
+    <footer>
+      <h4>Related posts:</h4>
+      <ul>
+        <li><a href="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html">Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!</a></li>
+        <li><a href="http://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html">Capturing and filtering <span class="caps">SIP</span>/<span class="caps">RTP</span> data with&nbsp;tshark</a></li>
+        <li><a href="http://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html">When <span class="caps">OSX</span> shebang won&#8217;t use Bash 4 from&nbsp;brew</a></li>
+      </ul>
+    </footer>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';

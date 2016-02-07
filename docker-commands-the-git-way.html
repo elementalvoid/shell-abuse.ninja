@@ -64,20 +64,20 @@
   </header>
   <div>
     <p>Wouldn&#8217;t it be nice if you could run <code>docker compose</code> instead of <code>docker-compose</code>? What about Docker Machine? You&nbsp;can!</p>
-<div class="highlight"><pre>docker () {
-  local cmd=$(command -v docker-<span class="cp">${</span><span class="mi">1</span><span class="cp">}</span>);
-  if [[ -n <span class="cp">${</span><span class="n">cmd</span><span class="cp">}</span> ]]; then
-    shift;
-    <span class="cp">${</span><span class="n">cmd</span><span class="cp">}</span> <span class="cp">${</span><span class="err">@</span><span class="cp">}</span>;
-  else
-    command -p docker -- <span class="cp">${</span><span class="err">@</span><span class="cp">}</span>;
-  fi;
-}
+<div class="highlight"><pre>docker <span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local</span> <span class="nv">cmd</span><span class="o">=</span><span class="k">$(</span><span class="nb">command</span> -v docker-<span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="k">)</span><span class="p">;</span>
+  <span class="k">if</span> <span class="o">[[</span> -n <span class="si">${</span><span class="nv">cmd</span><span class="si">}</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+    shift<span class="p">;</span>
+    <span class="si">${</span><span class="nv">cmd</span><span class="si">}</span> <span class="si">${</span><span class="p">@</span><span class="si">}</span><span class="p">;</span>
+  <span class="k">else</span>
+    <span class="nb">command</span> -p docker -- <span class="si">${</span><span class="p">@</span><span class="si">}</span><span class="p">;</span>
+  <span class="k">fi</span><span class="p">;</span>
+<span class="o">}</span>
 </pre></div>
 
 
 <p>Throw that in your shell rc somewhere and&nbsp;then&#8230;</p>
-<div class="highlight"><pre>docker compose ps  # &lt;-- instead of &#39;docker-compose ps&#39;
+<div class="highlight"><pre>docker compose ps  <span class="c1"># &lt;-- instead of &#39;docker-compose ps&#39;</span>
        Name                      Command               State                    Ports
 -------------------------------------------------------------------------------------------------------
 dockerghost_ghost_1   /entrypoint.sh npm start - ...   Up      2368/tcp
@@ -87,9 +87,9 @@ dockerghost_nginx_1   /usr/bin/reefer -t /templa ...   Up      0.0.0.0:443-&gt;4
 
 <hr />
 <p>Create your own commands - yours should be a little less&nbsp;pointless.</p>
-<div class="highlight"><pre># Create a custom docker wrapper
-docker-foo () { echo &#39; :: Hi there! ::&#39;; }
-# And run it
+<div class="highlight"><pre><span class="c1"># Create a custom docker wrapper</span>
+docker-foo <span class="o">()</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s1">&#39; :: Hi there! ::&#39;</span><span class="p">;</span> <span class="o">}</span>
+<span class="c1"># And run it</span>
 docker foo
  :: Hi there! ::
 </pre></div>
@@ -100,6 +100,12 @@ docker foo
       <a href="http://shell-abuse.ninja/tag/git.html">git</a>
     </p>
   </div>
+    <footer>
+      <h4>Related posts:</h4>
+      <ul>
+        <li><a href="http://shell-abuse.ninja/getting-to-the-root-of-you-git.html">Getting to the root of your&nbsp;Git</a></li>
+      </ul>
+    </footer>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';

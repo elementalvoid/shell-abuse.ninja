@@ -108,17 +108,17 @@ exec /sbin/getty -L ttyS1 115200 vt102
 <p>I&#8217;m not sure what this would look like for Debian. Stupid Ubuntu I’m on is using&nbsp;upstart.</p>
 <p>Install and configure <code>ipmitool</code>.</p>
 <div class="highlight"><pre>apt-get install ipmitool
-ipmitool sol set non-volatile-bit-rate 115.2 1
-ipmitool sol set volatile-bit-rate 115.2 1
+ipmitool sol <span class="nb">set</span> non-volatile-bit-rate 115.2 1
+ipmitool sol <span class="nb">set</span> volatile-bit-rate 115.2 1
 </pre></div>
 
 
 <h2>What&#8217;s the point if you can&#8217;t use&nbsp;it?</h2>
 <p>On a Mac with brew.sh installed and&nbsp;functioning:</p>
 <div class="highlight"><pre>brew install freeipmi
-# -P prompts for the password
-# -e &#39;~&#39; sets the escape character to match SSH&#39;s
-ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &#39;~&#39;
+<span class="c1"># -P prompts for the password</span>
+<span class="c1"># -e &#39;~&#39; sets the escape character to match SSH&#39;s</span>
+ipmiconsole -h rack2-spare-adm -u ADMIN -P -e <span class="s1">&#39;~&#39;</span>
 </pre></div>
 
 
@@ -140,6 +140,12 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &#39;~&#39;
       <a href="http://shell-abuse.ninja/tag/serial-over-lan.html">serial over lan</a>
     </p>
   </div>
+    <footer>
+      <h4>Related posts:</h4>
+      <ul>
+        <li><a href="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html"><span class="caps">IP</span> address associated with the default&nbsp;route</a></li>
+      </ul>
+    </footer>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';

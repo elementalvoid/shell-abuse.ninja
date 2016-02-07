@@ -40,17 +40,17 @@ exec /sbin/getty -L ttyS1 115200 vt102
 &lt;p&gt;I&amp;#8217;m not sure what this would look like for Debian. Stupid Ubuntu I’m on is using&amp;nbsp;upstart.&lt;/p&gt;
 &lt;p&gt;Install and configure &lt;code&gt;ipmitool&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;apt-get install ipmitool
-ipmitool sol set non-volatile-bit-rate 115.2 1
-ipmitool sol set volatile-bit-rate 115.2 1
+ipmitool sol &lt;span class="nb"&gt;set&lt;/span&gt; non-volatile-bit-rate 115.2 1
+ipmitool sol &lt;span class="nb"&gt;set&lt;/span&gt; volatile-bit-rate 115.2 1
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;What&amp;#8217;s the point if you can&amp;#8217;t use&amp;nbsp;it?&lt;/h2&gt;
 &lt;p&gt;On a Mac with brew.sh installed and&amp;nbsp;functioning:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;brew install freeipmi
-# -P prompts for the password
-# -e &amp;#39;~&amp;#39; sets the escape character to match SSH&amp;#39;s
-ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &amp;#39;~&amp;#39;
+&lt;span class="c1"&gt;# -P prompts for the password&lt;/span&gt;
+&lt;span class="c1"&gt;# -e &amp;#39;~&amp;#39; sets the escape character to match SSH&amp;#39;s&lt;/span&gt;
+ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &lt;span class="s1"&gt;&amp;#39;~&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -61,103 +61,103 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &amp;#39;~&amp;#39;
 &lt;li&gt;http://www.alleft.com/sysadmin/ipmi-sol-inexpensive-remote-console/&lt;/li&gt;
 &lt;li&gt;ftp://ftp.supermicro.com/utility/SMCIPMItool/Linux/&lt;/li&gt;
 &lt;/ul&gt;</summary><category term="ipmi"></category><category term="linux"></category><category term="java"></category><category term="sol"></category><category term="remote console"></category><category term="serial over lan"></category></entry><entry><title>Capturing and filtering SIP/RTP data with tshark</title><link href="http://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html" rel="alternate"></link><updated>2015-08-04T13:51:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-08-04:capturing-and-filtering-sip_rtp-data-with-tshark.html</id><summary type="html">&lt;p&gt;When filing issues with my &lt;span class="caps"&gt;SIP&lt;/span&gt; trunk provider they usually want some sort of call record to help track/troubleshoot the issue. In my case I don&amp;#8217;t have any eavesdropping concerns as all the calls are with family members. So, I use tshark to grab a ring buffer of &lt;span class="caps"&gt;RTP&lt;/span&gt;/&lt;span class="caps"&gt;SIP&lt;/span&gt; data as&amp;nbsp;follows:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# ensure that the dumpcap binary has the proper Linux capabilities
-/sbin/setcap &amp;#39;CAP_NET_RAW+eip CAP_NET_ADMIN+eip&amp;#39;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# ensure that the dumpcap binary has the proper Linux capabilities&lt;/span&gt;
+/sbin/setcap &lt;span class="s1"&gt;&amp;#39;CAP_NET_RAW+eip CAP_NET_ADMIN+eip&amp;#39;&lt;/span&gt;
 
-# Grab SIP and related RTP packets and store them in a ring buffer
-cap_dir=&amp;#39;/var/cache/sip-dump&amp;#39;
-cap_file=&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cap_dir&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/sip-rtp.pcap
-cap_files=50
-cap_size=51200
+&lt;span class="c1"&gt;# Grab SIP and related RTP packets and store them in a ring buffer&lt;/span&gt;
+&lt;span class="nv"&gt;cap_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/var/cache/sip-dump&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;cap_file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cap_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/sip-rtp.pcap
+&lt;span class="nv"&gt;cap_files&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;50
+&lt;span class="nv"&gt;cap_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;51200
 
-tshark \
- -i eth0 \
- -o &amp;#39;rtp.heuristic_rtp: TRUE&amp;#39; \
- -w &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cap_file&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; \
- -b filesize:&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cap_size&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; \ # Ring
- -b files:&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cap_files&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; \   # Buffer
- &amp;#39;(udp port 5080) or (udp port 5060) or (udp[1] &lt;span class="err"&gt;&amp;amp;&lt;/span&gt; 1 != 1 &lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt; udp[3] &lt;span class="err"&gt;&amp;amp;&lt;/span&gt; 1 != 1 &lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt; udp[8] &lt;span class="err"&gt;&amp;amp;&lt;/span&gt; 0x80 == 0x80 &lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt; length &lt;span class="nt"&gt;&amp;lt; 250&lt;/span&gt;&lt;span class="err"&gt;)&amp;#39;&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;
- &lt;span class="err"&gt;2&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;/dev/null &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;
+tshark &lt;span class="se"&gt;\&lt;/span&gt;
+ -i eth0 &lt;span class="se"&gt;\&lt;/span&gt;
+ -o &lt;span class="s1"&gt;&amp;#39;rtp.heuristic_rtp: TRUE&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ -w &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cap_file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ -b filesize:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cap_size&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Ring&lt;/span&gt;
+ -b files:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cap_files&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\ &lt;/span&gt;  &lt;span class="c1"&gt;# Buffer&lt;/span&gt;
+ &lt;span class="s1"&gt;&amp;#39;(udp port 5080) or (udp port 5060) or (udp[1] &amp;amp; 1 != 1 &amp;amp;&amp;amp; udp[3] &amp;amp; 1 != 1 &amp;amp;&amp;amp; udp[8] &amp;amp; 0x80 == 0x80 &amp;amp;&amp;amp; length &amp;lt; 250)&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ 2&amp;gt;/dev/null &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The filter comes straight from the Freeswitch wiki page on &lt;a href="https://freeswitch.org/confluence/display/FREESWITCH/Packet+Capture#PacketCapture-tsharkakatethereal"&gt;packet capturing&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Of course all of that is wrapped up in a service script that starts/stops the capture and performs tool installation and cron-based&amp;nbsp;cleanup.&lt;/p&gt;
 &lt;p&gt;Since this creates multiple reasonably sized capture files I generally need to merge some in order to filter on the correct time&amp;nbsp;range:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# create a single file for all of 20150804
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# create a single file for all of 20150804&lt;/span&gt;
 mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;To build a list of all &lt;span class="caps"&gt;SIP&lt;/span&gt; &lt;span class="caps"&gt;BYE&lt;/span&gt;&amp;nbsp;messages:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;tshark \
- &lt;span class="o"&gt;-&lt;/span&gt;n \ &lt;span class="c1"&gt;# Disable network object name resolution&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;N nN \ &lt;span class="c1"&gt;# Turn on name resolving only for network address resolution using external resolvers (e.g., DNS)&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;W n \ &lt;span class="c1"&gt;# save host name resolution records along with captured packets.&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;Y &lt;span class="s"&gt;&amp;#39;sip.Method == &amp;quot;BYE&amp;quot;&amp;#39;&lt;/span&gt; \ &lt;span class="c1"&gt;# display filter - only show SIP BYEs&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;t ad \ &lt;span class="c1"&gt;# timestamp format: absolute with date&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="bp"&gt;T&lt;/span&gt; fields \ &lt;span class="c1"&gt;# Output format (print fields given with &amp;#39;-e&amp;#39;)&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;E header&lt;span class="o"&gt;=&lt;/span&gt;y \ &lt;span class="c1"&gt;# print headers&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;e frame.number \ &lt;span class="c1"&gt;# Field: Ethernet frame number&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;e frame.time \ &lt;span class="c1"&gt;# Field: Ethernet frame timestamp&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;e ip.src_host \ &lt;span class="c1"&gt;# Field: source ip&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;e ip.dst_host \ &lt;span class="c1"&gt;# Field: destination ip&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;e sip.To \ &lt;span class="c1"&gt;# Field: Who&amp;#39;s being called&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;e sip.From \ &lt;span class="c1"&gt;# Field: Who&amp;#39;s calling&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;e sip.Reason \ &lt;span class="c1"&gt;# Field: Why did we hangup&lt;/span&gt;
- &lt;span class="o"&gt;-&lt;/span&gt;r all.pcapng \ &lt;span class="c1"&gt;# which pcap to read from&lt;/span&gt;
-&lt;span class="o"&gt;|&lt;/span&gt; column &lt;span class="o"&gt;-&lt;/span&gt;t &lt;span class="o"&gt;-&lt;/span&gt;s&lt;span class="s"&gt;&amp;#39;   &amp;#39;&lt;/span&gt; &lt;span class="c1"&gt;#make it pretty &amp;lt;- that&amp;#39;s a tab character&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;tshark &lt;span class="se"&gt;\&lt;/span&gt;
+ -n &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Disable network object name resolution&lt;/span&gt;
+ -N nN &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Turn on name resolving only for network address resolution using external resolvers (e.g., DNS)&lt;/span&gt;
+ -W n &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# save host name resolution records along with captured packets.&lt;/span&gt;
+ -Y &lt;span class="s1"&gt;&amp;#39;sip.Method == &amp;quot;BYE&amp;quot;&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# display filter - only show SIP BYEs&lt;/span&gt;
+ -t ad &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# timestamp format: absolute with date&lt;/span&gt;
+ -T fields &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Output format (print fields given with &amp;#39;-e&amp;#39;)&lt;/span&gt;
+ -E &lt;span class="nv"&gt;header&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;y &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# print headers&lt;/span&gt;
+ -e frame.number &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Field: Ethernet frame number&lt;/span&gt;
+ -e frame.time &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Field: Ethernet frame timestamp&lt;/span&gt;
+ -e ip.src_host &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Field: source ip&lt;/span&gt;
+ -e ip.dst_host &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Field: destination ip&lt;/span&gt;
+ -e sip.To &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Field: Who&amp;#39;s being called&lt;/span&gt;
+ -e sip.From &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Field: Who&amp;#39;s calling&lt;/span&gt;
+ -e sip.Reason &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Field: Why did we hangup&lt;/span&gt;
+ -r all.pcapng &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# which pcap to read from&lt;/span&gt;
+&lt;span class="p"&gt;|&lt;/span&gt; column -t -s&lt;span class="s1"&gt;&amp;#39;   &amp;#39;&lt;/span&gt; &lt;span class="c1"&gt;#make it pretty &amp;lt;- that&amp;#39;s a tab character&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;em&gt;Hint:&lt;/em&gt; To create an actual tab character on the shell type &lt;code&gt;Ctrl+v Ctrl+i&lt;/code&gt;.&lt;/p&gt;</summary><category term="wireshark"></category><category term="tshark"></category><category term="SIP"></category><category term="VoIP"></category><category term="networking"></category></entry><entry><title>Getting to the root of your Git</title><link href="http://shell-abuse.ninja/getting-to-the-root-of-you-git.html" rel="alternate"></link><updated>2015-05-17T14:47:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:getting-to-the-root-of-you-git.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;function gcd {
-  if which git &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null; then
-    STATUS=$(git status 2&amp;gt;/dev/null)
-    if [[ -z &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;STATUS&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; ]]; then
-      return
-    fi
-    TARGET=&amp;quot;./$(command git rev-parse --show-cdup)$1&amp;quot;
-    cd &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;TARGET&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
-  fi
-}
+&lt;p&gt;&lt;em&gt;Hint:&lt;/em&gt; To create an actual tab character on the shell type &lt;code&gt;Ctrl+v Ctrl+i&lt;/code&gt;.&lt;/p&gt;</summary><category term="wireshark"></category><category term="tshark"></category><category term="SIP"></category><category term="VoIP"></category><category term="networking"></category></entry><entry><title>Getting to the root of your Git</title><link href="http://shell-abuse.ninja/getting-to-the-root-of-you-git.html" rel="alternate"></link><updated>2015-05-17T14:47:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:getting-to-the-root-of-you-git.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;function&lt;/span&gt; gcd &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; which git &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git status 2&amp;gt;/dev/null&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -z &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+    &lt;span class="nv"&gt;TARGET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;command&lt;/span&gt; git rev-parse --show-cdup&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;TARGET&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Tab&amp;nbsp;completion!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;function _git_cd {
-  if $(which git &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null); then
-    STATUS=$(git status 2&amp;gt;/dev/null)
-    if [[ -z &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;STATUS&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; ]]; then
-      return
-    fi
-    TARGET=&amp;quot;./$(command git rev-parse --show-cdup)&amp;quot;
-    if [[ -d &lt;span class="nv"&gt;$TARGET&lt;/span&gt; ]]; then
-      TARGET=&amp;quot;&lt;span class="nv"&gt;$TARGET&lt;/span&gt;/&amp;quot;
-    fi
-    COMPREPLY=()
-    cur=&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;COMP_WORDS&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;COMP_CWORD&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot;
-    prev=&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;COMP_WORDS&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;COMP_CWORD&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;$2&amp;quot;
-    opts=$(cd &lt;span class="nv"&gt;$TARGET&lt;/span&gt;; compgen -d -o dirnames -S / -X &amp;#39;@(*/.git|*/.git/|.git|.git/)&amp;#39; $2)
-    if [[ &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; == * ]]; then
-      COMPREPLY=( $(compgen -W &amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&amp;quot; -- &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;) )
-      return 0
-    fi
-  fi
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;function&lt;/span&gt; _git_cd &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;which git &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git status 2&amp;gt;/dev/null&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -z &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+    &lt;span class="nv"&gt;TARGET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;command&lt;/span&gt; git rev-parse --show-cdup&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -d $TARGET &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+      &lt;span class="nv"&gt;TARGET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;$&lt;span class="s2"&gt;TARGET/&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+    &lt;span class="nv"&gt;COMPREPLY&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt;
+    &lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;COMP_WORDS&lt;/span&gt;&lt;span class="p"&gt;[COMP_CWORD]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;COMP_WORDS&lt;/span&gt;&lt;span class="p"&gt;[COMP_CWORD-1]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;opts&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; $TARGET&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;compgen&lt;/span&gt; -d -o dirnames -S / -X &lt;span class="s1"&gt;&amp;#39;@(*/.git|*/.git/|.git|.git/)&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; * &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+      &lt;span class="nv"&gt;COMPREPLY&lt;/span&gt;&lt;span class="o"&gt;=(&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;compgen&lt;/span&gt; -W &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;opts&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -- &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="o"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt; 0
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+  &lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Usage:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ls &lt;span class="o"&gt;-&lt;/span&gt;d &lt;span class="m"&gt;.&lt;/span&gt;git  &lt;span class="c1"&gt;# &amp;lt;- we&amp;#39;re in the root&lt;/span&gt;
-mkdir &lt;span class="o"&gt;-&lt;/span&gt;p a&lt;span class="o"&gt;/&lt;/span&gt;b&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt; d&lt;span class="o"&gt;/&lt;/span&gt;e&lt;span class="o"&gt;/&lt;/span&gt;f
-cd a&lt;span class="o"&gt;/&lt;/span&gt;b&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kt"&gt;c&lt;/span&gt;
-gcd d&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;TAB&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ls -d .git  &lt;span class="c1"&gt;# &amp;lt;- we&amp;#39;re in the root&lt;/span&gt;
+mkdir -p a/b/c d/e/f
+&lt;span class="nb"&gt;cd&lt;/span&gt; a/b/c
+gcd d&amp;lt;TAB&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="git"></category><category term="bash"></category><category term="util"></category></entry><entry><title>IP address associated with the default route</title><link href="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html" rel="alternate"></link><updated>2015-05-17T14:35:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:ip-address-associated-with-the-default-route.html</id><summary type="html">&lt;p&gt;Need a way to determine the &lt;span class="caps"&gt;IP&lt;/span&gt; address which would be used for outbound communication without actually making any outbound connections? Here&amp;#8217;s one&amp;nbsp;method.&lt;/p&gt;
 &lt;p&gt;Tested on Debian, CoreOS, CentOS, and &lt;span class="caps"&gt;OSX&lt;/span&gt;&amp;nbsp;Yosemite.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ifconfig $(
-  { route get 4.2.2.2 || route -n; } 2&amp;gt;/dev/null | \
-    awk &amp;#39;/UG/ {print $8}; /interface:/ {print $2}&amp;#39; | head -n 1
-) | awk &amp;#39;/inet / {print $2}&amp;#39; | sed -e &amp;#39;s/addr://&amp;#39;
+&lt;div class="highlight"&gt;&lt;pre&gt;ifconfig &lt;span class="k"&gt;$(&lt;/span&gt;
+  &lt;span class="o"&gt;{&lt;/span&gt; route get 4.2.2.2 &lt;span class="o"&gt;||&lt;/span&gt; route -n&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; 2&amp;gt;/dev/null &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    awk &lt;span class="s1"&gt;&amp;#39;/UG/ {print $8}; /interface:/ {print $2}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; head -n 1
+&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;/inet / {print $2}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sed -e &lt;span class="s1"&gt;&amp;#39;s/addr://&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="hack"></category><category term="osx"></category><category term="linux"></category><category term="networking"></category><category term="ifconfig"></category></entry><entry><title>When OSX shebang won’t use Bash 4 from brew</title><link href="http://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html" rel="alternate"></link><updated>2015-05-17T00:45:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:when-osx-shebang-wont-use-bash-4.html</id><summary type="html">&lt;p&gt;Gah! A fellow at work had a Mac that refused to run Bash 4 as installed via &lt;a href="http://brew.sh/"&gt;Brew&lt;/a&gt;. He could run &lt;code&gt;bash&lt;/code&gt; from a shell and get 4.x but no matter what we did to the shebang of our script it always ended up running Bash 3 as installed by Apple. We came up with this ugly&amp;nbsp;bit:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="ch"&gt;#!/usr/bin/env bash&lt;/span&gt;
 &lt;span class="c1"&gt;## ensure bash 4.x&lt;/span&gt;
@@ -173,20 +173,20 @@ gcd d&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;TAB&lt;span class="o"&gt;&amp;gt
 
 
 &lt;p&gt;It works on both Linux and&amp;nbsp;Mac.&lt;/p&gt;</summary><category term="osx"></category><category term="bash"></category><category term="ugly hack"></category></entry><entry><title>Docker commands - the git way</title><link href="http://shell-abuse.ninja/docker-commands-the-git-way.html" rel="alternate"></link><updated>2015-05-16T22:20:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-16:docker-commands-the-git-way.html</id><summary type="html">&lt;p&gt;Wouldn&amp;#8217;t it be nice if you could run &lt;code&gt;docker compose&lt;/code&gt; instead of &lt;code&gt;docker-compose&lt;/code&gt;? What about Docker Machine? You&amp;nbsp;can!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;docker () {
-  local cmd=$(command -v docker-&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;);
-  if [[ -n &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; ]]; then
-    shift;
-    &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;;
-  else
-    command -p docker -- &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;;
-  fi;
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;docker &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;command&lt;/span&gt; -v docker-&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -n &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    shift&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;else&lt;/span&gt;
+    &lt;span class="nb"&gt;command&lt;/span&gt; -p docker -- &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;fi&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Throw that in your shell rc somewhere and&amp;nbsp;then&amp;#8230;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;docker compose ps  # &amp;lt;-- instead of &amp;#39;docker-compose ps&amp;#39;
+&lt;div class="highlight"&gt;&lt;pre&gt;docker compose ps  &lt;span class="c1"&gt;# &amp;lt;-- instead of &amp;#39;docker-compose ps&amp;#39;&lt;/span&gt;
        Name                      Command               State                    Ports
 -------------------------------------------------------------------------------------------------------
 dockerghost_ghost_1   /entrypoint.sh npm start - ...   Up      2368/tcp
@@ -196,9 +196,9 @@ dockerghost_nginx_1   /usr/bin/reefer -t /templa ...   Up      0.0.0.0:443-&amp;
 
 &lt;hr /&gt;
 &lt;p&gt;Create your own commands - yours should be a little less&amp;nbsp;pointless.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# Create a custom docker wrapper
-docker-foo () { echo &amp;#39; :: Hi there! ::&amp;#39;; }
-# And run it
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Create a custom docker wrapper&lt;/span&gt;
+docker-foo &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; :: Hi there! ::&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;# And run it&lt;/span&gt;
 docker foo
  :: Hi there! ::
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="docker"></category><category term="git"></category></entry></feed>

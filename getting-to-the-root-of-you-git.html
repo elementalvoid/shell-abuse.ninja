@@ -64,48 +64,48 @@
     <p>Posted on Sun 17 May 2015 in <a href="http://shell-abuse.ninja/category/dev-tools.html">Dev Tools</a></p>
   </header>
   <div>
-    <div class="highlight"><pre>function gcd {
-  if which git <span class="err">&amp;</span>&gt; /dev/null; then
-    STATUS=$(git status 2&gt;/dev/null)
-    if [[ -z <span class="cp">${</span><span class="n">STATUS</span><span class="cp">}</span> ]]; then
-      return
-    fi
-    TARGET=&quot;./$(command git rev-parse --show-cdup)$1&quot;
-    cd <span class="cp">${</span><span class="n">TARGET</span><span class="cp">}</span>
-  fi
-}
+    <div class="highlight"><pre><span class="k">function</span> gcd <span class="o">{</span>
+  <span class="k">if</span> which git <span class="p">&amp;</span>&gt; /dev/null<span class="p">;</span> <span class="k">then</span>
+    <span class="nv">STATUS</span><span class="o">=</span><span class="k">$(</span>git status 2&gt;/dev/null<span class="k">)</span>
+    <span class="k">if</span> <span class="o">[[</span> -z <span class="si">${</span><span class="nv">STATUS</span><span class="si">}</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+      <span class="k">return</span>
+    <span class="k">fi</span>
+    <span class="nv">TARGET</span><span class="o">=</span><span class="s2">&quot;./</span><span class="k">$(</span><span class="nb">command</span> git rev-parse --show-cdup<span class="k">)</span><span class="nv">$1</span><span class="s2">&quot;</span>
+    <span class="nb">cd</span> <span class="si">${</span><span class="nv">TARGET</span><span class="si">}</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
 </pre></div>
 
 
 <p>Tab&nbsp;completion!</p>
-<div class="highlight"><pre>function _git_cd {
-  if $(which git <span class="err">&amp;</span>&gt; /dev/null); then
-    STATUS=$(git status 2&gt;/dev/null)
-    if [[ -z <span class="cp">${</span><span class="n">STATUS</span><span class="cp">}</span> ]]; then
-      return
-    fi
-    TARGET=&quot;./$(command git rev-parse --show-cdup)&quot;
-    if [[ -d <span class="nv">$TARGET</span> ]]; then
-      TARGET=&quot;<span class="nv">$TARGET</span>/&quot;
-    fi
-    COMPREPLY=()
-    cur=&quot;<span class="cp">${</span><span class="n">COMP_WORDS</span><span class="p">[</span><span class="n">COMP_CWORD</span><span class="p">]</span><span class="cp">}</span>&quot;
-    prev=&quot;<span class="cp">${</span><span class="n">COMP_WORDS</span><span class="p">[</span><span class="n">COMP_CWORD</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="cp">}</span>$2&quot;
-    opts=$(cd <span class="nv">$TARGET</span>; compgen -d -o dirnames -S / -X &#39;@(*/.git|*/.git/|.git|.git/)&#39; $2)
-    if [[ <span class="cp">${</span><span class="n">cur</span><span class="cp">}</span> == * ]]; then
-      COMPREPLY=( $(compgen -W &quot;<span class="cp">${</span><span class="n">opts</span><span class="cp">}</span>&quot; -- <span class="cp">${</span><span class="n">cur</span><span class="cp">}</span>) )
-      return 0
-    fi
-  fi
-}
+<div class="highlight"><pre><span class="k">function</span> _git_cd <span class="o">{</span>
+  <span class="k">if</span> <span class="k">$(</span>which git <span class="p">&amp;</span>&gt; /dev/null<span class="k">)</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">STATUS</span><span class="o">=</span><span class="k">$(</span>git status 2&gt;/dev/null<span class="k">)</span>
+    <span class="k">if</span> <span class="o">[[</span> -z <span class="si">${</span><span class="nv">STATUS</span><span class="si">}</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+      <span class="k">return</span>
+    <span class="k">fi</span>
+    <span class="nv">TARGET</span><span class="o">=</span><span class="s2">&quot;./</span><span class="k">$(</span><span class="nb">command</span> git rev-parse --show-cdup<span class="k">)</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="o">[[</span> -d $TARGET <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+      <span class="nv">TARGET</span><span class="o">=</span><span class="s2">&quot;</span>$<span class="s2">TARGET/&quot;</span>
+    <span class="k">fi</span>
+    <span class="nv">COMPREPLY</span><span class="o">=()</span>
+    <span class="nv">cur</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[COMP_CWORD]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nv">prev</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[COMP_CWORD-1]</span><span class="si">}</span><span class="nv">$2</span><span class="s2">&quot;</span>
+    <span class="nv">opts</span><span class="o">=</span><span class="k">$(</span><span class="nb">cd</span> $TARGET<span class="p">;</span> <span class="nb">compgen</span> -d -o dirnames -S / -X <span class="s1">&#39;@(*/.git|*/.git/|.git|.git/)&#39;</span> <span class="nv">$2</span><span class="k">)</span>
+    <span class="k">if</span> <span class="o">[[</span> <span class="si">${</span><span class="nv">cur</span><span class="si">}</span> <span class="o">==</span> * <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+      <span class="nv">COMPREPLY</span><span class="o">=(</span> <span class="k">$(</span><span class="nb">compgen</span> -W <span class="s2">&quot;</span><span class="si">${</span><span class="nv">opts</span><span class="si">}</span><span class="s2">&quot;</span> -- <span class="si">${</span><span class="nv">cur</span><span class="si">}</span><span class="k">)</span> <span class="o">)</span>
+      <span class="k">return</span> 0
+    <span class="k">fi</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
 </pre></div>
 
 
 <p>Usage:</p>
-<div class="highlight"><pre>ls <span class="o">-</span>d <span class="m">.</span>git  <span class="c1"># &lt;- we&#39;re in the root</span>
-mkdir <span class="o">-</span>p a<span class="o">/</span>b<span class="o">/</span><span class="kt">c</span> d<span class="o">/</span>e<span class="o">/</span>f
-cd a<span class="o">/</span>b<span class="o">/</span><span class="kt">c</span>
-gcd d<span class="o">&lt;</span>TAB<span class="o">&gt;</span>
+<div class="highlight"><pre>ls -d .git  <span class="c1"># &lt;- we&#39;re in the root</span>
+mkdir -p a/b/c d/e/f
+<span class="nb">cd</span> a/b/c
+gcd d&lt;TAB&gt;
 </pre></div>
   </div>
   <div class="tag-cloud">
@@ -115,6 +115,13 @@ gcd d<span class="o">&lt;</span>TAB<span class="o">&gt;</span>
       <a href="http://shell-abuse.ninja/tag/util.html">util</a>
     </p>
   </div>
+    <footer>
+      <h4>Related posts:</h4>
+      <ul>
+        <li><a href="http://shell-abuse.ninja/docker-commands-the-git-way.html">Docker commands - the git&nbsp;way</a></li>
+        <li><a href="http://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html">When <span class="caps">OSX</span> shebang won&#8217;t use Bash 4 from&nbsp;brew</a></li>
+      </ul>
+    </footer>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';
