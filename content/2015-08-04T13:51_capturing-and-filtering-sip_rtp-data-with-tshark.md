@@ -1,7 +1,6 @@
 Title: Capturing and filtering SIP/RTP data with tshark
-Category: Networking
+Category: Linux
 Tags: wireshark, tshark, SIP, VoIP, networking
-Author: Matt Klich - Chief Abuser
 Summary: Create a ring buffer of packet captures on a VoIP/SIP server.
 
 When filing issues with my SIP trunk provider they usually want some sort of call record to help track/troubleshoot the issue. In my case I don't have any eavesdropping concerns as all the calls are with family members. So, I use tshark to grab a ring buffer of RTP/SIP data as follows:

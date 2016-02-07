@@ -1,7 +1,6 @@
 Title:Getting to the root of your Git
-Category: Git
+Category: Dev Tools
 Tags: git, bash, util
-Author: Matt Klich - Chief Abuser
 Summary: How to quickly cd to the root of your git repository.
 
 ```language-bash

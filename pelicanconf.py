@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = u'Matt Klich'
+AUTHOR = u'Matt Klich - Chief Abuser'
 SITENAME = u'Shell Abuse'
 SITESUBTITLE = u'Bending the shell to your whim - occasionally with abandon.'
 SITEURL = 'http://localhost:8000'
@@ -23,7 +23,7 @@ AUTHOR_FEED_RSS = None
 
 # Theme and theme config
 THEME = "Flex"
-SITELOGO = "//images/elementalvoid-avatar.png"
+SITELOGO = "/images/elementalvoid-avatar.png"
 DISQUS_SITENAME = "shellabuse"
 MAIN_MENU = True
 USE_FOLDER_AS_CATEGORY = True

@@ -1,7 +1,6 @@
 Title: IP address associated with the default route
 Category: Linux
 Tags: hack, osx, linux, networking, ifconfig
-Author: Matt Klich - Chief Abuser
 Summary: Find the IP associated with the default route on Linux and Mac OSX.
 
 Need a way to determine the IP address which would be used for outbound communication without actually making any outbound connections? Here's one method.

@@ -1,7 +1,6 @@
 Title: Docker commands - the git way
-Category: Docker
+Category: Dev Tools
 Tags: docker, git,
-Author: Matt Klich - Chief Abuser
 Summary: Wouldn't it be nice if you could run `docker compose` instead of `docker-compose`? What about Docker Machine? You can!
 
 Wouldn't it be nice if you could run `docker compose` instead of `docker-compose`? What about Docker Machine? You can!
