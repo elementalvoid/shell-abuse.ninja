@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/font-awesome.min.css">
+
+
+    <link href="http://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
+
+
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+<meta name="author" content="Matt Klich - Chief Abuser" />
+<meta name="description" content="I found myself needing to parse an HAProxy log file but was too lazy to write a proper regular" />
+<meta name="keywords" content="regex, grok, python, haproxy">
+<meta property="og:site_name" content="Shell Abuse"/>
+<meta property="og:title" content="What the Grok!? - A Python script to convert grok epxressions to regex"/>
+<meta property="og:description" content="I found myself needing to parse an HAProxy log file but was too lazy to write a proper regular"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://shell-abuse.ninja/what-the-grok-regex-convertor.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-08-17 13:12:00-06:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
+<meta property="article:section" content="Regex"/>
+<meta property="article:tag" content="regex"/>
+<meta property="article:tag" content="grok"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="haproxy"/>
+<meta property="og:image" content="/images/elementalvoid-avatar.png">
+  <title>Shell Abuse &ndash; What the Grok!? - A Python script to convert grok epxressions to regex</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://shell-abuse.ninja">
+        <img src="/images/elementalvoid-avatar.png" alt="" title="">
+      </a>
+      <h1><a href="http://shell-abuse.ninja"></a></h1>
+      <p>Bending the shell to your whim - occasionally with abandon.</p>
+      <nav>
+        <ul class="list">
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/mattklich" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/elementalvoid" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-stack-overflow" href="http://stackoverflow.com/users/436190/elementalvoid" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
+        <li><a class="sc-google" href="https://google.com/+MattKlich" target="_blank"><i class="fa fa-google"></i></a></li>
+        <li><a class="sc-rss" href="//shell-abuse.ninja/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="http://shell-abuse.ninja">Home</a>
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">Atom</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="what-the-grok-regex-convertor">What the Grok!? - A Python script to convert grok epxressions to&nbsp;regex</h1>
+    <p>Posted on Wed 17 August 2016 in <a href="http://shell-abuse.ninja/category/regex.html">Regex</a></p>
+  </header>
+  <div>
+    <p>expression by hand. I knew that Grok had HAProxy expressions so I wrote this to pull out the raw regular&nbsp;expression.</p>
+<h2>What is&nbsp;Grok?</h2>
+<p>If you&#8217;ve never used <a href="https://github.com/jordansissel/grok">Grok</a> you&#8217;re missing ou&#8217;t. It&#8217;s fantastic for
+parsing (semi-?)structured data using regular expressions. The basic premise is that you construct a complex
+expression by peicing together smaller epxressions. Each expression could actually be a raw regex, a
+collection of other expressions, or a mix of&nbsp;both.</p>
+<h2>A simple&nbsp;example</h2>
+<p>Say you had a simple log message with an <span class="caps">ISO8601</span>&nbsp;timestamp:</p>
+<div class="highlight"><pre>2016-08-17 20:07:22 - Hello there
+</pre></div>
+
+
+<h3>That&#8217;s easy right?&nbsp;Right!?</h3>
+<p>Well, what if you need to parse that into the full date and time, their individual components, and the message?
+You could write a <a href="https://en.wikipedia.org/wiki/Parsing#Parser">parser</a> but maybe you can&#8217;t hook that into an
+existing toolset. Maybe you&#8217;re not a developer.  Maybe your cat ate your &#8216;Parsers for Dummies&#8217; book. <span class="caps">BTW</span>,
+your cat is a&nbsp;monster.</p>
+<h3>Enter Regex - You&#8217;re winning&nbsp;already!</h3>
+<p>Oh. Wait. Nope, it&#8217;s not quite that easy. Unless you really like regex you&#8217;re probably going to be lazy and
+skip the part of the spec that said you needed each component of the date. You&#8217;ll end up with something like&nbsp;this:</p>
+<div class="highlight"><pre>^(?&lt;date&gt;[^\s]+) (?&lt;time&gt;[^\s]+) - (?&lt;message&gt;.*)$
+</pre></div>
+
+
+<p>Let&#8217;s take a look at that on <a href="https://regex101.com/r/hY7zK0/1">regex101.com</a> an online regex testing&nbsp;tool.</p>
+<p>That&#8217;s not horrible and it works. But parsing the date and time components is extra work and I&#8217;m pretty lazy&nbsp;sometimes.</p>
+<h3>Enter Grok - Are we done&nbsp;yet?</h3>
+<p>Keep in mind this example is fairly trivial. Using Grok we have access to a <a href="https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns">library of prebuilt patterns</a>
+for things like dates, numbers, text,&nbsp;etc.</p>
+<p>Here&#8217;s our Grok&nbsp;pattern:</p>
+<div class="highlight"><pre>%{TIMESTAMP_ISO8601} - %{GREEDYDATA}
+</pre></div>
+
+
+<p>That&#8217;s a minimal pattern that will match and provide most of what we&#8217;re looking for. We can be more explicit
+though and meet all of our&nbsp;requirements.</p>
+<p>Let&#8217;s break down the <code>TIMESTAMP_ISO8601</code> pattern. You&#8217;ll find it defined in the
+<a href="https://github.com/logstash-plugins/logstash-patterns-core/blob/master/patterns/grok-patterns">grok-patterns</a>&nbsp;file:</p>
+<div class="highlight"><pre>TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?
+</pre></div>
+
+
+<p>Let&#8217;s just enhance that a&nbsp;bit.</p>
+<div class="highlight"><pre>%{YEAR:year}-%{MONTHNUM:month}-%{MONTHDAY:day}[T ]%{HOUR:hour}:?%{MINUTE:minute}(?::?%{SECOND:second})?%{ISO8601_TIMEZONE:timezone}? - %{GREEDYDATA:message}
+</pre></div>
+
+
+<p>That&#8217;s a much more complete pattern and it provides names for all the items (note the <code>%{PATTER:name}</code> syntax). And, it
+was still pretty easy since we modified an existing&nbsp;pattern.</p>
+<h2>A non-trivial&nbsp;example</h2>
+<h3>HAProxy&nbsp;logs</h3>
+<p>HAProxy has some pretty nice logs containing tons of information. They&#8217;re also well structured and should be easy to
+parse. However, when you&#8217;re limited to using regex it quickly becomes a nightmare. Luckily, thanks to the pattern library
+we have a prebuilt pattern to parse HAProxy&nbsp;logs.</p>
+<p>The log format is also <a href="http://cbonte.github.io/haproxy-dconv/1.6/configuration.html#8.2.3">very well documented</a>.</p>
+<p>Let&#8217;s see what a log line looks like (line breaks&nbsp;added):</p>
+<div class="highlight"><pre>Feb  6 12:14:14 localhost \
+      haproxy[14389]: 10.0.1.2:33317 [06/Feb/2009:12:14:14.655] http-in \
+            static/srv1 10/0/30/69/109 200 2750 - - ---- 1/1/1/1/0 0/0 {1wt.eu} \
+                  {} &quot;GET /index.html HTTP/1.1&quot;
+</pre></div>
+
+
+<p>Lot&#8217;s of work went into this behind the scenes so that all we need is this Grok&nbsp;pattern:</p>
+<div class="highlight"><pre>%{HAPROXYHTTP}
+</pre></div>
+
+
+<p>That&#8217;s it. That&#8217;s everything. It provides proper matching and named groups for all the log&nbsp;elements.</p>
+<h2>That&#8217;s great, but what about my&nbsp;regex?</h2>
+<p>Finally, we&#8217;re at the end. We have a Grok pattern that properly handles our logs but we need a regex to put into some
+other tool. Unfortunately, I was unable to find anything that would provide the final compiled regex of a Grok&nbsp;pattern.</p>
+<p>So, I wrote&nbsp;one.</p>
+<p>Before we see the code, let&#8217;s see what it can&nbsp;do!</p>
+<h3>How about an <span class="caps">IP</span>&nbsp;address?</h3>
+<p>Let&#8217;s see what the regex looks like for an <span class="caps">IP</span>&nbsp;address:</p>
+<div class="highlight"><pre># First, clone the patterns repo
+git clone git@github.com:logstash-plugins/logstash-patterns-core.git
+
+# And run the tool
+./grok-to-regex.py -d logstash-patterns-core/patterns/ &#39;%{IP:client_ip}&#39;
+(?&lt;client_ip&gt;(?:((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?|(?&lt;![0-9])(?:(?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]))(?![0-9])))
+</pre></div>
+
+
+<p>Wow, that&#8217;s a lot of regex! But, it&#8217;ll match both <span class="caps">IPV4</span> and <span class="caps">IPV6</span> addresses and I didn&#8217;t do any <em>real</em> work. :&nbsp;)</p>
+<h3>Back to HAProxy logs for a&nbsp;moment</h3>
+<p>Since this all started with HAProxy logs lets see what they look&nbsp;like.</p>
+<div class="highlight"><pre>./grok-to-regex.py -d logstash-patterns-core/patterns/ &#39;%{HAPROXYHTTP}&#39;
+</pre></div>
+
+
+<p>For the sake of your eyes I&#8217;m not going to insert the output here. Instead, let&#8217;s take a look at it on <a href="://regex101.com/r/hY7zK0/2">regex101.com</a>&nbsp;again.</p>
+<h3>And now, finally, the&nbsp;code</h3>
+<p>It&#8217;s pure python and doesn&#8217;t depend on any extra bits and peices. I suspect, though <span class="caps">YMMV</span>, that it will work on Windows&nbsp;too.</p>
+<script src="https://gist.github.com/elementalvoid/59afc405f2f5726ad1980e8d8178536b.js"></script>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="http://shell-abuse.ninja/tag/regex.html">regex</a>
+      <a href="http://shell-abuse.ninja/tag/grok.html">grok</a>
+      <a href="http://shell-abuse.ninja/tag/python.html">python</a>
+      <a href="http://shell-abuse.ninja/tag/haproxy.html">haproxy</a>
+    </p>
+  </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'shellabuse';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+    <footer>
+        <p>&copy; Matt Klich - Chief Abuser </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57473144', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "What the Grok!? - A Python script to convert grok epxressions to regex",
+  "headline": "What the Grok!? - A Python script to convert grok epxressions to regex",
+  "datePublished": "2016-08-17 13:12:00-06:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Matt Klich - Chief Abuser",
+    "url": "http://shell-abuse.ninja/author/matt-klich-chief-abuser.html"
+  },
+  "image": "/images/elementalvoid-avatar.png",
+  "url": "http://shell-abuse.ninja/what-the-grok-regex-convertor.html",
+  "description": "I found myself needing to parse an HAProxy log file but was too lazy to write a proper regular"
+}
+</script></body>
+</html>

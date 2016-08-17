@@ -1,5 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/all.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2016-02-03T16:27:00-07:00</updated><entry><title>Serial Over LAN (SOL) - Java’s dead!</title><link href="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html" rel="alternate"></link><updated>2016-02-03T16:27:00-07:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-02-03:serial-over-lan-sol-javas-dead.html</id><summary type="html">&lt;p&gt;I&amp;#8217;ve been a sysadmin and worked with sysadmins for years but we&amp;#8217;ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove &lt;span class="caps"&gt;LAN&lt;/span&gt; (&lt;span class="caps"&gt;SOL&lt;/span&gt;) using &lt;span class="caps"&gt;IPMI&lt;/span&gt;. Turns out, its &lt;em&gt;super&lt;/em&gt;&amp;nbsp;easy!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/all.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2016-08-17T13:12:00-06:00</updated><entry><title>What the Grok!? - A Python script to convert grok epxressions to regex</title><link href="http://shell-abuse.ninja/what-the-grok-regex-convertor.html" rel="alternate"></link><updated>2016-08-17T13:12:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-08-17:what-the-grok-regex-convertor.html</id><summary type="html">&lt;p&gt;expression by hand. I knew that Grok had HAProxy expressions so I wrote this to pull out the raw regular&amp;nbsp;expression.&lt;/p&gt;
+&lt;h2&gt;What is&amp;nbsp;Grok?&lt;/h2&gt;
+&lt;p&gt;If you&amp;#8217;ve never used &lt;a href="https://github.com/jordansissel/grok"&gt;Grok&lt;/a&gt; you&amp;#8217;re missing ou&amp;#8217;t. It&amp;#8217;s fantastic for
+parsing (semi-?)structured data using regular expressions. The basic premise is that you construct a complex
+expression by peicing together smaller epxressions. Each expression could actually be a raw regex, a
+collection of other expressions, or a mix of&amp;nbsp;both.&lt;/p&gt;
+&lt;h2&gt;A simple&amp;nbsp;example&lt;/h2&gt;
+&lt;p&gt;Say you had a simple log message with an &lt;span class="caps"&gt;ISO8601&lt;/span&gt;&amp;nbsp;timestamp:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;2016-08-17 20:07:22 - Hello there
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;That&amp;#8217;s easy right?&amp;nbsp;Right!?&lt;/h3&gt;
+&lt;p&gt;Well, what if you need to parse that into the full date and time, their individual components, and the message?
+You could write a &lt;a href="https://en.wikipedia.org/wiki/Parsing#Parser"&gt;parser&lt;/a&gt; but maybe you can&amp;#8217;t hook that into an
+existing toolset. Maybe you&amp;#8217;re not a developer.  Maybe your cat ate your &amp;#8216;Parsers for Dummies&amp;#8217; book. &lt;span class="caps"&gt;BTW&lt;/span&gt;,
+your cat is a&amp;nbsp;monster.&lt;/p&gt;
+&lt;h3&gt;Enter Regex - You&amp;#8217;re winning&amp;nbsp;already!&lt;/h3&gt;
+&lt;p&gt;Oh. Wait. Nope, it&amp;#8217;s not quite that easy. Unless you really like regex you&amp;#8217;re probably going to be lazy and
+skip the part of the spec that said you needed each component of the date. You&amp;#8217;ll end up with something like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;^(?&amp;lt;date&amp;gt;[^\s]+) (?&amp;lt;time&amp;gt;[^\s]+) - (?&amp;lt;message&amp;gt;.*)$
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let&amp;#8217;s take a look at that on &lt;a href="https://regex101.com/r/hY7zK0/1"&gt;regex101.com&lt;/a&gt; an online regex testing&amp;nbsp;tool.&lt;/p&gt;
+&lt;p&gt;That&amp;#8217;s not horrible and it works. But parsing the date and time components is extra work and I&amp;#8217;m pretty lazy&amp;nbsp;sometimes.&lt;/p&gt;
+&lt;h3&gt;Enter Grok - Are we done&amp;nbsp;yet?&lt;/h3&gt;
+&lt;p&gt;Keep in mind this example is fairly trivial. Using Grok we have access to a &lt;a href="https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns"&gt;library of prebuilt patterns&lt;/a&gt;
+for things like dates, numbers, text,&amp;nbsp;etc.&lt;/p&gt;
+&lt;p&gt;Here&amp;#8217;s our Grok&amp;nbsp;pattern:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;%{TIMESTAMP_ISO8601} - %{GREEDYDATA}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That&amp;#8217;s a minimal pattern that will match and provide most of what we&amp;#8217;re looking for. We can be more explicit
+though and meet all of our&amp;nbsp;requirements.&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s break down the &lt;code&gt;TIMESTAMP_ISO8601&lt;/code&gt; pattern. You&amp;#8217;ll find it defined in the
+&lt;a href="https://github.com/logstash-plugins/logstash-patterns-core/blob/master/patterns/grok-patterns"&gt;grok-patterns&lt;/a&gt;&amp;nbsp;file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let&amp;#8217;s just enhance that a&amp;nbsp;bit.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;%{YEAR:year}-%{MONTHNUM:month}-%{MONTHDAY:day}[T ]%{HOUR:hour}:?%{MINUTE:minute}(?::?%{SECOND:second})?%{ISO8601_TIMEZONE:timezone}? - %{GREEDYDATA:message}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That&amp;#8217;s a much more complete pattern and it provides names for all the items (note the &lt;code&gt;%{PATTER:name}&lt;/code&gt; syntax). And, it
+was still pretty easy since we modified an existing&amp;nbsp;pattern.&lt;/p&gt;
+&lt;h2&gt;A non-trivial&amp;nbsp;example&lt;/h2&gt;
+&lt;h3&gt;HAProxy&amp;nbsp;logs&lt;/h3&gt;
+&lt;p&gt;HAProxy has some pretty nice logs containing tons of information. They&amp;#8217;re also well structured and should be easy to
+parse. However, when you&amp;#8217;re limited to using regex it quickly becomes a nightmare. Luckily, thanks to the pattern library
+we have a prebuilt pattern to parse HAProxy&amp;nbsp;logs.&lt;/p&gt;
+&lt;p&gt;The log format is also &lt;a href="http://cbonte.github.io/haproxy-dconv/1.6/configuration.html#8.2.3"&gt;very well documented&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s see what a log line looks like (line breaks&amp;nbsp;added):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Feb  6 12:14:14 localhost \
+      haproxy[14389]: 10.0.1.2:33317 [06/Feb/2009:12:14:14.655] http-in \
+            static/srv1 10/0/30/69/109 200 2750 - - ---- 1/1/1/1/0 0/0 {1wt.eu} \
+                  {} &amp;quot;GET /index.html HTTP/1.1&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Lot&amp;#8217;s of work went into this behind the scenes so that all we need is this Grok&amp;nbsp;pattern:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;%{HAPROXYHTTP}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That&amp;#8217;s it. That&amp;#8217;s everything. It provides proper matching and named groups for all the log&amp;nbsp;elements.&lt;/p&gt;
+&lt;h2&gt;That&amp;#8217;s great, but what about my&amp;nbsp;regex?&lt;/h2&gt;
+&lt;p&gt;Finally, we&amp;#8217;re at the end. We have a Grok pattern that properly handles our logs but we need a regex to put into some
+other tool. Unfortunately, I was unable to find anything that would provide the final compiled regex of a Grok&amp;nbsp;pattern.&lt;/p&gt;
+&lt;p&gt;So, I wrote&amp;nbsp;one.&lt;/p&gt;
+&lt;p&gt;Before we see the code, let&amp;#8217;s see what it can&amp;nbsp;do!&lt;/p&gt;
+&lt;h3&gt;How about an &lt;span class="caps"&gt;IP&lt;/span&gt;&amp;nbsp;address?&lt;/h3&gt;
+&lt;p&gt;Let&amp;#8217;s see what the regex looks like for an &lt;span class="caps"&gt;IP&lt;/span&gt;&amp;nbsp;address:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# First, clone the patterns repo
+git clone git@github.com:logstash-plugins/logstash-patterns-core.git
+
+# And run the tool
+./grok-to-regex.py -d logstash-patterns-core/patterns/ &amp;#39;%{IP:client_ip}&amp;#39;
+(?&amp;lt;client_ip&amp;gt;(?:((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?|(?&amp;lt;![0-9])(?:(?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]))(?![0-9])))
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Wow, that&amp;#8217;s a lot of regex! But, it&amp;#8217;ll match both &lt;span class="caps"&gt;IPV4&lt;/span&gt; and &lt;span class="caps"&gt;IPV6&lt;/span&gt; addresses and I didn&amp;#8217;t do any &lt;em&gt;real&lt;/em&gt; work. :&amp;nbsp;)&lt;/p&gt;
+&lt;h3&gt;Back to HAProxy logs for a&amp;nbsp;moment&lt;/h3&gt;
+&lt;p&gt;Since this all started with HAProxy logs lets see what they look&amp;nbsp;like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;./grok-to-regex.py -d logstash-patterns-core/patterns/ &amp;#39;%{HAPROXYHTTP}&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For the sake of your eyes I&amp;#8217;m not going to insert the output here. Instead, let&amp;#8217;s take a look at it on &lt;a href="://regex101.com/r/hY7zK0/2"&gt;regex101.com&lt;/a&gt;&amp;nbsp;again.&lt;/p&gt;
+&lt;h3&gt;And now, finally, the&amp;nbsp;code&lt;/h3&gt;
+&lt;p&gt;It&amp;#8217;s pure python and doesn&amp;#8217;t depend on any extra bits and peices. I suspect, though &lt;span class="caps"&gt;YMMV&lt;/span&gt;, that it will work on Windows&amp;nbsp;too.&lt;/p&gt;
+&lt;script src="https://gist.github.com/elementalvoid/59afc405f2f5726ad1980e8d8178536b.js"&gt;&lt;/script&gt;</summary><category term="regex"></category><category term="grok"></category><category term="python"></category><category term="haproxy"></category></entry><entry><title>Serial Over LAN (SOL) - Java’s dead!</title><link href="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html" rel="alternate"></link><updated>2016-02-03T16:27:00-07:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-02-03:serial-over-lan-sol-javas-dead.html</id><summary type="html">&lt;p&gt;I&amp;#8217;ve been a sysadmin and worked with sysadmins for years but we&amp;#8217;ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove &lt;span class="caps"&gt;LAN&lt;/span&gt; (&lt;span class="caps"&gt;SOL&lt;/span&gt;) using &lt;span class="caps"&gt;IPMI&lt;/span&gt;. Turns out, its &lt;em&gt;super&lt;/em&gt;&amp;nbsp;easy!&lt;/p&gt;
 &lt;p&gt;So, I&amp;#8217;ve written up some simple instructions to configure &lt;span class="caps"&gt;SOL&lt;/span&gt; on Ubuntu Trusty (14.somethingorother). One super important thing to keep in mind is that the bit rates configured at each step need to be the&amp;nbsp;same.&lt;/p&gt;
 &lt;p&gt;Assumption: You&amp;#8217;re using sudo liberally or, like my favorite &lt;span class="caps"&gt;SA&lt;/span&gt;, you just drop into a root shell and stay there.&amp;nbsp;Forever.&lt;/p&gt;
 &lt;h2&gt;Bios&amp;nbsp;Redirection&lt;/h2&gt;
