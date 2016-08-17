@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/all.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2016-08-17T13:12:00-06:00</updated><entry><title>What the Grok!? - A Python script to convert grok epxressions to regex</title><link href="http://shell-abuse.ninja/what-the-grok-regex-convertor.html" rel="alternate"></link><updated>2016-08-17T13:12:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-08-17:what-the-grok-regex-convertor.html</id><summary type="html">&lt;h2&gt;What is&amp;nbsp;Grok?&lt;/h2&gt;
-&lt;p&gt;If you&amp;#8217;ve never used &lt;a href="https://github.com/jordansissel/grok"&gt;Grok&lt;/a&gt; you&amp;#8217;re missing ou&amp;#8217;t. It&amp;#8217;s fantastic for
+&lt;p&gt;If you&amp;#8217;ve never used &lt;a href="https://github.com/jordansissel/grok"&gt;Grok&lt;/a&gt; you&amp;#8217;re missing out. It&amp;#8217;s fantastic for
 parsing (semi-?)structured data using regular expressions. The basic premise is that you construct a complex
 expression by peicing together smaller epxressions. Each expression could actually be a raw regex, a
 collection of other expressions, or a mix of&amp;nbsp;both.&lt;/p&gt;
