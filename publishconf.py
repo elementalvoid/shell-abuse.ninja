@@ -22,4 +22,4 @@ DELETE_OUTPUT_DIRECTORY = True
 # Following items are often useful when publishing
 
 DISQUS_SITENAME = "shellabuse"
-GOOGLE_ANALYTICS = "UA-57473144"
+GOOGLE_ANALYTICS = "UA-57473144-2"

@@ -32,6 +32,8 @@ MENUITEMS = (
     ('Categories', '/categories.html'),
     ('Tags', '/tags.html'),
 )
+PYGMENTS_STYLE = 'github'
+BROWSER_COLOR = '#333'
 # End theme and theme config
 
 FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2})_(?P<slug>.*)'
@@ -44,17 +46,17 @@ EXTRA_PATH_METADATA = {
 
 # Plugins
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['related_posts', 'sitemap']
+PLUGINS = ['related_posts', 'sitemap', 'post_stats']
 # End Plugins
 
 TYPOGRIFY = True
 
 # Blogroll
-#LINKS = (
-#    ('Pelican', 'http://getpelican.com/'),
-#    ('Python.org', 'http://python.org/'),
-#    ('Jinja2', 'http://jinja.pocoo.org/'),
-#)
+# LINKS = (
+#     ('Pelican', 'http://getpelican.com/'),
+#     ('Python.org', 'http://python.org/'),
+#     ('Jinja2', 'http://jinja.pocoo.org/'),
+# )
 
 
 # Social widget
@@ -69,4 +71,4 @@ SOCIAL = (
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+# RELATIVE_URLS = True
