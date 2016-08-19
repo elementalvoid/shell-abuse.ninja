@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,8 @@
 
     <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
 
 
     <link href="http://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
@@ -14,8 +15,18 @@
 
 
   <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <meta name="author" content="Matt Klich - Chief Abuser" />
 <meta name="description" content="I’ve been a sysadmin and worked with sysadmins for years but we’ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove LAN (SOL) using IPMI. Turns out, its super easy!" />
@@ -37,6 +48,7 @@
 <meta property="article:tag" content="remote console"/>
 <meta property="article:tag" content="serial over lan"/>
 <meta property="og:image" content="/images/elementalvoid-avatar.png">
+
   <title>Shell Abuse &ndash; Serial Over LAN (SOL) - Java’s dead!</title>
 </head>
 <body>
@@ -46,11 +58,9 @@
         <img src="/images/elementalvoid-avatar.png" alt="" title="">
       </a>
       <h1><a href="http://shell-abuse.ninja"></a></h1>
-      <p>Bending the shell to your whim - occasionally with abandon.</p>
-      <nav>
-        <ul class="list">
-        </ul>
-      </nav>
+
+<p>Bending the shell to your whim - occasionally with abandon.</p>
+
       <ul class="social">
         <li><a class="sc-linkedin" href="https://www.linkedin.com/in/mattklich" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         <li><a class="sc-github" href="https://github.com/elementalvoid" target="_blank"><i class="fa fa-github"></i></a></li>
@@ -62,17 +72,27 @@
   </aside>
   <main>
     <nav>
-      <a href="http://shell-abuse.ninja">Home</a>
+      <a href="http://shell-abuse.ninja">    Home
+</a>
+
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
-      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">Atom</a>
+
+      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">    Atom
+</a>
+
     </nav>
 
 <article>
   <header>
     <h1 id="serial-over-lan-sol-javas-dead">Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!</h1>
-    <p>Posted on Wed 03 February 2016 in <a href="http://shell-abuse.ninja/category/linux.html">Linux</a></p>
+    <p>
+          Posted on Wed 03 February 2016 in <a href="http://shell-abuse.ninja/category/linux.html">Linux</a>
+
+
+        &#8226; 2 min read
+    </p>
   </header>
   <div>
     <p>I&#8217;ve been a sysadmin and worked with sysadmins for years but we&#8217;ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove <span class="caps">LAN</span> (<span class="caps">SOL</span>) using <span class="caps">IPMI</span>. Turns out, its <em>super</em>&nbsp;easy!</p>
@@ -84,7 +104,7 @@
 <h2>Grub and Linux Kernel Space&nbsp;Redirection</h2>
 <p>These settings allow you to see and manipulate Grub and to see kernel level boot&nbsp;messages.</p>
 <p>Ensure the following are configured in <code>/etc/default/grub</code>:</p>
-<div class="highlight"><pre># Enable kernel space redirection so you can see kernel boot messages.
+<div class="highlight"><pre><span></span># Enable kernel space redirection so you can see kernel boot messages.
 GRUB_CMDLINE_LINUX=&quot;console=tty0 console=ttyS1,115200n8&quot;
 
 # Enable Grub to be seen over SOL.
@@ -99,7 +119,7 @@ GRUB_SERIAL_COMMAND=&quot;serial --speed=115200 --unit=1 --word=8 --parity=no --
 <h2>Linux User Space&nbsp;Redirection</h2>
 <p>Once the kernel hands things over to user space we need to redirect a virtual terminal to the serial&nbsp;port.</p>
 <p>Create <code>/etc/init/ttyS1.conf</code>.</p>
-<div class="highlight"><pre># ttyS1 - getty
+<div class="highlight"><pre><span></span># ttyS1 - getty
 #
 # This service maintains a getty on ttyS1 from the point the system is
 # started until it is shut down again.
@@ -115,7 +135,7 @@ exec /sbin/getty -L ttyS1 115200 vt102
 <p>And start it: <code>service ttyS1 start</code>.</p>
 <p>I&#8217;m not sure what this would look like for Debian. Stupid Ubuntu I’m on is using&nbsp;upstart.</p>
 <p>Install and configure <code>ipmitool</code>.</p>
-<div class="highlight"><pre>apt-get install ipmitool
+<div class="highlight"><pre><span></span>apt-get install ipmitool
 ipmitool sol <span class="nb">set</span> non-volatile-bit-rate 115.2 1
 ipmitool sol <span class="nb">set</span> volatile-bit-rate 115.2 1
 </pre></div>
@@ -123,7 +143,7 @@ ipmitool sol <span class="nb">set</span> volatile-bit-rate 115.2 1
 
 <h2>What&#8217;s the point if you can&#8217;t use&nbsp;it?</h2>
 <p>On a Mac with brew.sh installed and&nbsp;functioning:</p>
-<div class="highlight"><pre>brew install freeipmi
+<div class="highlight"><pre><span></span>brew install freeipmi
 <span class="c1"># -P prompts for the password</span>
 <span class="c1"># -e &#39;~&#39; sets the escape character to match SSH&#39;s</span>
 ipmiconsole -h rack2-spare-adm -u ADMIN -P -e <span class="s1">&#39;~&#39;</span>
@@ -148,12 +168,16 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e <span class="s1">&#39;~&#39;</span
       <a href="http://shell-abuse.ninja/tag/serial-over-lan.html">serial over lan</a>
     </p>
   </div>
+
+
   <div class="related-posts">
-    <h4>Related posts:</h4>
-    <ul>
+    <h4>    You might enjoy
+</h4>
+    <ul class="related-posts">
       <li><a href="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html"><span class="caps">IP</span> address associated with the default&nbsp;route</a></li>
     </ul>
   </div>
+
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';
@@ -163,12 +187,16 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e <span class="s1">&#39;~&#39;</span
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
 </article>
 
     <footer>
-        <p>&copy; Matt Klich - Chief Abuser </p>
-<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy; Matt Klich - Chief Abuser </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 <!-- Google Analytics -->
@@ -187,20 +215,13 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e <span class="s1">&#39;~&#39;</span
 
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "name": "Serial Over LAN (SOL) - Java’s dead!",
-  "headline": "Serial Over LAN (SOL) - Java’s dead!",
-  "datePublished": "2016-02-03 16:27:00-07:00",
-  "dateModified": "",
-  "author": {
-    "@type": "Person",
-    "name": "Matt Klich - Chief Abuser",
-    "url": "http://shell-abuse.ninja/author/matt-klich-chief-abuser.html"
-  },
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Shell Abuse ",
+  "url" : "http://shell-abuse.ninja",
   "image": "/images/elementalvoid-avatar.png",
-  "url": "http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html",
-  "description": "I’ve been a sysadmin and worked with sysadmins for years but we’ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove LAN (SOL) using IPMI. Turns out, its super easy!"
+  "description": ""
 }
-</script></body>
+</script>
+</body>
 </html>

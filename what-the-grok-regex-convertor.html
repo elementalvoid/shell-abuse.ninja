@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,8 @@
 
     <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
 
 
     <link href="http://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
@@ -14,8 +15,18 @@
 
 
   <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <meta name="author" content="Matt Klich - Chief Abuser" />
 <meta name="description" content="I found myself needing to parse an HAProxy log file but was too lazy to write a proper regular expression by hand. I knew that Grok had HAProxy expressions so I wrote a tool to pull out the raw regular expression." />
@@ -35,6 +46,7 @@
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="haproxy"/>
 <meta property="og:image" content="/images/elementalvoid-avatar.png">
+
   <title>Shell Abuse &ndash; What the Grok!? - A Python script to convert grok epxressions to regex</title>
 </head>
 <body>
@@ -44,11 +56,9 @@
         <img src="/images/elementalvoid-avatar.png" alt="" title="">
       </a>
       <h1><a href="http://shell-abuse.ninja"></a></h1>
-      <p>Bending the shell to your whim - occasionally with abandon.</p>
-      <nav>
-        <ul class="list">
-        </ul>
-      </nav>
+
+<p>Bending the shell to your whim - occasionally with abandon.</p>
+
       <ul class="social">
         <li><a class="sc-linkedin" href="https://www.linkedin.com/in/mattklich" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         <li><a class="sc-github" href="https://github.com/elementalvoid" target="_blank"><i class="fa fa-github"></i></a></li>
@@ -60,17 +70,27 @@
   </aside>
   <main>
     <nav>
-      <a href="http://shell-abuse.ninja">Home</a>
+      <a href="http://shell-abuse.ninja">    Home
+</a>
+
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
-      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">Atom</a>
+
+      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">    Atom
+</a>
+
     </nav>
 
 <article>
   <header>
     <h1 id="what-the-grok-regex-convertor">What the Grok!? - A Python script to convert grok epxressions to&nbsp;regex</h1>
-    <p>Posted on Wed 17 August 2016 in <a href="http://shell-abuse.ninja/category/regex.html">Regex</a></p>
+    <p>
+          Posted on Wed 17 August 2016 in <a href="http://shell-abuse.ninja/category/regex.html">Regex</a>
+
+
+        &#8226; 3 min read
+    </p>
   </header>
   <div>
     <h2>What is&nbsp;Grok?</h2>
@@ -80,7 +100,7 @@ expression by peicing together smaller epxressions. Each expression could actual
 collection of other expressions, or a mix of&nbsp;both.</p>
 <h2>A simple&nbsp;example</h2>
 <p>Say you had a simple log message with an <span class="caps">ISO8601</span>&nbsp;timestamp:</p>
-<div class="highlight"><pre>2016-08-17 20:07:22 - Hello there
+<div class="highlight"><pre><span></span>2016-08-17 20:07:22 - Hello there
 </pre></div>
 
 
@@ -92,7 +112,7 @@ your cat is a&nbsp;monster.</p>
 <h3>Enter Regex - You&#8217;re winning&nbsp;already!</h3>
 <p>Oh. Wait. Nope, it&#8217;s not quite that easy. Unless you really like regex you&#8217;re probably going to be lazy and
 skip the part of the spec that said you needed each component of the date. You&#8217;ll end up with something like&nbsp;this:</p>
-<div class="highlight"><pre>^(?&lt;date&gt;[^\s]+) (?&lt;time&gt;[^\s]+) - (?&lt;message&gt;.*)$
+<div class="highlight"><pre><span></span>^(?&lt;date&gt;[^\s]+) (?&lt;time&gt;[^\s]+) - (?&lt;message&gt;.*)$
 </pre></div>
 
 
@@ -102,7 +122,7 @@ skip the part of the spec that said you needed each component of the date. You&#
 <p>Keep in mind this example is fairly trivial. Using Grok we have access to a <a href="https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns">library of prebuilt patterns</a>
 for things like dates, numbers, text,&nbsp;etc.</p>
 <p>Here&#8217;s our Grok&nbsp;pattern:</p>
-<div class="highlight"><pre>%{TIMESTAMP_ISO8601} - %{GREEDYDATA}
+<div class="highlight"><pre><span></span>%{TIMESTAMP_ISO8601} - %{GREEDYDATA}
 </pre></div>
 
 
@@ -110,12 +130,12 @@ for things like dates, numbers, text,&nbsp;etc.</p>
 though and meet all of our&nbsp;requirements.</p>
 <p>Let&#8217;s break down the <code>TIMESTAMP_ISO8601</code> pattern. You&#8217;ll find it defined in the
 <a href="https://github.com/logstash-plugins/logstash-patterns-core/blob/master/patterns/grok-patterns">grok-patterns</a>&nbsp;file:</p>
-<div class="highlight"><pre>TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?
+<div class="highlight"><pre><span></span>TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?
 </pre></div>
 
 
 <p>Let&#8217;s just enhance that a&nbsp;bit.</p>
-<div class="highlight"><pre>%{YEAR:year}-%{MONTHNUM:month}-%{MONTHDAY:day}[T ]%{HOUR:hour}:?%{MINUTE:minute}(?::?%{SECOND:second})?%{ISO8601_TIMEZONE:timezone}? - %{GREEDYDATA:message}
+<div class="highlight"><pre><span></span>%{YEAR:year}-%{MONTHNUM:month}-%{MONTHDAY:day}[T ]%{HOUR:hour}:?%{MINUTE:minute}(?::?%{SECOND:second})?%{ISO8601_TIMEZONE:timezone}? - %{GREEDYDATA:message}
 </pre></div>
 
 
@@ -128,7 +148,7 @@ parse. However, when you&#8217;re limited to using regex it quickly becomes a ni
 we have a prebuilt pattern to parse HAProxy&nbsp;logs.</p>
 <p>The log format is also <a href="http://cbonte.github.io/haproxy-dconv/1.6/configuration.html#8.2.3">very well documented</a>.</p>
 <p>Let&#8217;s see what a log line looks like (line breaks&nbsp;added):</p>
-<div class="highlight"><pre>Feb  6 12:14:14 localhost \
+<div class="highlight"><pre><span></span>Feb  6 12:14:14 localhost \
       haproxy[14389]: 10.0.1.2:33317 [06/Feb/2009:12:14:14.655] http-in \
             static/srv1 10/0/30/69/109 200 2750 - - ---- 1/1/1/1/0 0/0 {1wt.eu} \
                   {} &quot;GET /index.html HTTP/1.1&quot;
@@ -136,7 +156,7 @@ we have a prebuilt pattern to parse HAProxy&nbsp;logs.</p>
 
 
 <p>Lot&#8217;s of work went into this behind the scenes so that all we need is this Grok&nbsp;pattern:</p>
-<div class="highlight"><pre>%{HAPROXYHTTP}
+<div class="highlight"><pre><span></span>%{HAPROXYHTTP}
 </pre></div>
 
 
@@ -148,7 +168,7 @@ other tool. Unfortunately, I was unable to find anything that would provide the 
 <p>Before we see the code, let&#8217;s see what it can&nbsp;do!</p>
 <h3>How about an <span class="caps">IP</span>&nbsp;address?</h3>
 <p>Let&#8217;s see what the regex looks like for an <span class="caps">IP</span>&nbsp;address:</p>
-<div class="highlight"><pre># First, clone the patterns repo
+<div class="highlight"><pre><span></span># First, clone the patterns repo
 git clone git@github.com:logstash-plugins/logstash-patterns-core.git
 
 # And run the tool
@@ -160,7 +180,7 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
 <p>Wow, that&#8217;s a lot of regex! But, it&#8217;ll match both <span class="caps">IPV4</span> and <span class="caps">IPV6</span> addresses and I didn&#8217;t do any <em>real</em> work. :&nbsp;)</p>
 <h3>Back to HAProxy logs for a&nbsp;moment</h3>
 <p>Since this all started with HAProxy logs lets see what they look&nbsp;like.</p>
-<div class="highlight"><pre>./grok-to-regex.py -d logstash-patterns-core/patterns/ &#39;%{HAPROXYHTTP}&#39;
+<div class="highlight"><pre><span></span>./grok-to-regex.py -d logstash-patterns-core/patterns/ &#39;%{HAPROXYHTTP}&#39;
 </pre></div>
 
 
@@ -177,6 +197,9 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
       <a href="http://shell-abuse.ninja/tag/haproxy.html">haproxy</a>
     </p>
   </div>
+
+
+
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';
@@ -186,12 +209,16 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
 </article>
 
     <footer>
-        <p>&copy; Matt Klich - Chief Abuser </p>
-<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy; Matt Klich - Chief Abuser </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 <!-- Google Analytics -->
@@ -210,20 +237,13 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
 
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "name": "What the Grok!? - A Python script to convert grok epxressions to regex",
-  "headline": "What the Grok!? - A Python script to convert grok epxressions to regex",
-  "datePublished": "2016-08-17 13:12:00-06:00",
-  "dateModified": "",
-  "author": {
-    "@type": "Person",
-    "name": "Matt Klich - Chief Abuser",
-    "url": "http://shell-abuse.ninja/author/matt-klich-chief-abuser.html"
-  },
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Shell Abuse ",
+  "url" : "http://shell-abuse.ninja",
   "image": "/images/elementalvoid-avatar.png",
-  "url": "http://shell-abuse.ninja/what-the-grok-regex-convertor.html",
-  "description": "I found myself needing to parse an HAProxy log file but was too lazy to write a proper regular expression by hand. I knew that Grok had HAProxy expressions so I wrote a tool to pull out the raw regular expression."
+  "description": ""
 }
-</script></body>
+</script>
+</body>
 </html>

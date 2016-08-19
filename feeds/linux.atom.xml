@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/linux.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2016-02-03T16:27:00-07:00</updated><entry><title>Serial Over LAN (SOL) - Java’s dead!</title><link href="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html" rel="alternate"></link><updated>2016-02-03T16:27:00-07:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-02-03:serial-over-lan-sol-javas-dead.html</id><summary type="html">&lt;p&gt;I&amp;#8217;ve been a sysadmin and worked with sysadmins for years but we&amp;#8217;ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove &lt;span class="caps"&gt;LAN&lt;/span&gt; (&lt;span class="caps"&gt;SOL&lt;/span&gt;) using &lt;span class="caps"&gt;IPMI&lt;/span&gt;. Turns out, its &lt;em&gt;super&lt;/em&gt;&amp;nbsp;easy!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/linux.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2016-02-03T16:27:00-07:00</updated><entry><title>Serial Over LAN (SOL) - Java’s dead!</title><link href="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html" rel="alternate"></link><published>2016-02-03T16:27:00-07:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-02-03:serial-over-lan-sol-javas-dead.html</id><summary type="html">&lt;p&gt;I&amp;#8217;ve been a sysadmin and worked with sysadmins for years but we&amp;#8217;ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove &lt;span class="caps"&gt;LAN&lt;/span&gt; (&lt;span class="caps"&gt;SOL&lt;/span&gt;) using &lt;span class="caps"&gt;IPMI&lt;/span&gt;. Turns out, its &lt;em&gt;super&lt;/em&gt;&amp;nbsp;easy!&lt;/p&gt;
 &lt;p&gt;So, I&amp;#8217;ve written up some simple instructions to configure &lt;span class="caps"&gt;SOL&lt;/span&gt; on Ubuntu Trusty (14.somethingorother). One super important thing to keep in mind is that the bit rates configured at each step need to be the&amp;nbsp;same.&lt;/p&gt;
 &lt;p&gt;Assumption: You&amp;#8217;re using sudo liberally or, like my favorite &lt;span class="caps"&gt;SA&lt;/span&gt;, you just drop into a root shell and stay there.&amp;nbsp;Forever.&lt;/p&gt;
 &lt;h2&gt;Bios&amp;nbsp;Redirection&lt;/h2&gt;
@@ -8,7 +8,7 @@
 &lt;h2&gt;Grub and Linux Kernel Space&amp;nbsp;Redirection&lt;/h2&gt;
 &lt;p&gt;These settings allow you to see and manipulate Grub and to see kernel level boot&amp;nbsp;messages.&lt;/p&gt;
 &lt;p&gt;Ensure the following are configured in &lt;code&gt;/etc/default/grub&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# Enable kernel space redirection so you can see kernel boot messages.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# Enable kernel space redirection so you can see kernel boot messages.
 GRUB_CMDLINE_LINUX=&amp;quot;console=tty0 console=ttyS1,115200n8&amp;quot;
 
 # Enable Grub to be seen over SOL.
@@ -23,7 +23,7 @@ GRUB_SERIAL_COMMAND=&amp;quot;serial --speed=115200 --unit=1 --word=8 --parity=n
 &lt;h2&gt;Linux User Space&amp;nbsp;Redirection&lt;/h2&gt;
 &lt;p&gt;Once the kernel hands things over to user space we need to redirect a virtual terminal to the serial&amp;nbsp;port.&lt;/p&gt;
 &lt;p&gt;Create &lt;code&gt;/etc/init/ttyS1.conf&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# ttyS1 - getty
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# ttyS1 - getty
 #
 # This service maintains a getty on ttyS1 from the point the system is
 # started until it is shut down again.
@@ -39,7 +39,7 @@ exec /sbin/getty -L ttyS1 115200 vt102
 &lt;p&gt;And start it: &lt;code&gt;service ttyS1 start&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;I&amp;#8217;m not sure what this would look like for Debian. Stupid Ubuntu I’m on is using&amp;nbsp;upstart.&lt;/p&gt;
 &lt;p&gt;Install and configure &lt;code&gt;ipmitool&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;apt-get install ipmitool
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get install ipmitool
 ipmitool sol &lt;span class="nb"&gt;set&lt;/span&gt; non-volatile-bit-rate 115.2 1
 ipmitool sol &lt;span class="nb"&gt;set&lt;/span&gt; volatile-bit-rate 115.2 1
 &lt;/pre&gt;&lt;/div&gt;
@@ -47,7 +47,7 @@ ipmitool sol &lt;span class="nb"&gt;set&lt;/span&gt; volatile-bit-rate 115.2 1
 
 &lt;h2&gt;What&amp;#8217;s the point if you can&amp;#8217;t use&amp;nbsp;it?&lt;/h2&gt;
 &lt;p&gt;On a Mac with brew.sh installed and&amp;nbsp;functioning:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;brew install freeipmi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install freeipmi
 &lt;span class="c1"&gt;# -P prompts for the password&lt;/span&gt;
 &lt;span class="c1"&gt;# -e &amp;#39;~&amp;#39; sets the escape character to match SSH&amp;#39;s&lt;/span&gt;
 ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &lt;span class="s1"&gt;&amp;#39;~&amp;#39;&lt;/span&gt;
@@ -60,8 +60,8 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &lt;span class="s1"&gt;&amp;#39;~&
 &lt;li&gt;https://help.ubuntu.com/community/SerialConsoleHowto&lt;/li&gt;
 &lt;li&gt;http://www.alleft.com/sysadmin/ipmi-sol-inexpensive-remote-console/&lt;/li&gt;
 &lt;li&gt;ftp://ftp.supermicro.com/utility/SMCIPMItool/Linux/&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="ipmi"></category><category term="linux"></category><category term="java"></category><category term="sol"></category><category term="remote console"></category><category term="serial over lan"></category></entry><entry><title>Capturing and filtering SIP/RTP data with tshark</title><link href="http://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html" rel="alternate"></link><updated>2015-08-04T13:51:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-08-04:capturing-and-filtering-sip_rtp-data-with-tshark.html</id><summary type="html">&lt;p&gt;When filing issues with my &lt;span class="caps"&gt;SIP&lt;/span&gt; trunk provider they usually want some sort of call record to help track/troubleshoot the issue. In my case I don&amp;#8217;t have any eavesdropping concerns as all the calls are with family members. So, I use tshark to grab a ring buffer of &lt;span class="caps"&gt;RTP&lt;/span&gt;/&lt;span class="caps"&gt;SIP&lt;/span&gt; data as&amp;nbsp;follows:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# ensure that the dumpcap binary has the proper Linux capabilities&lt;/span&gt;
+&lt;/ul&gt;</summary><category term="ipmi"></category><category term="linux"></category><category term="java"></category><category term="sol"></category><category term="remote console"></category><category term="serial over lan"></category></entry><entry><title>Capturing and filtering SIP/RTP data with tshark</title><link href="http://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html" rel="alternate"></link><published>2015-08-04T13:51:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-08-04:capturing-and-filtering-sip_rtp-data-with-tshark.html</id><summary type="html">&lt;p&gt;When filing issues with my &lt;span class="caps"&gt;SIP&lt;/span&gt; trunk provider they usually want some sort of call record to help track/troubleshoot the issue. In my case I don&amp;#8217;t have any eavesdropping concerns as all the calls are with family members. So, I use tshark to grab a ring buffer of &lt;span class="caps"&gt;RTP&lt;/span&gt;/&lt;span class="caps"&gt;SIP&lt;/span&gt; data as&amp;nbsp;follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ensure that the dumpcap binary has the proper Linux capabilities&lt;/span&gt;
 /sbin/setcap &lt;span class="s1"&gt;&amp;#39;CAP_NET_RAW+eip CAP_NET_ADMIN+eip&amp;#39;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Grab SIP and related RTP packets and store them in a ring buffer&lt;/span&gt;
@@ -84,13 +84,13 @@ tshark &lt;span class="se"&gt;\&lt;/span&gt;
 &lt;p&gt;The filter comes straight from the Freeswitch wiki page on &lt;a href="https://freeswitch.org/confluence/display/FREESWITCH/Packet+Capture#PacketCapture-tsharkakatethereal"&gt;packet capturing&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Of course all of that is wrapped up in a service script that starts/stops the capture and performs tool installation and cron-based&amp;nbsp;cleanup.&lt;/p&gt;
 &lt;p&gt;Since this creates multiple reasonably sized capture files I generally need to merge some in order to filter on the correct time&amp;nbsp;range:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# create a single file for all of 20150804&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# create a single file for all of 20150804&lt;/span&gt;
 mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;To build a list of all &lt;span class="caps"&gt;SIP&lt;/span&gt; &lt;span class="caps"&gt;BYE&lt;/span&gt;&amp;nbsp;messages:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;tshark &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tshark &lt;span class="se"&gt;\&lt;/span&gt;
  -n &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Disable network object name resolution&lt;/span&gt;
  -N nN &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Turn on name resolving only for network address resolution using external resolvers (e.g., DNS)&lt;/span&gt;
  -W n &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# save host name resolution records along with captured packets.&lt;/span&gt;
@@ -110,9 +110,9 @@ mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;em&gt;Hint:&lt;/em&gt; To create an actual tab character on the shell type &lt;code&gt;Ctrl+v Ctrl+i&lt;/code&gt;.&lt;/p&gt;</summary><category term="wireshark"></category><category term="tshark"></category><category term="SIP"></category><category term="VoIP"></category><category term="networking"></category></entry><entry><title>IP address associated with the default route</title><link href="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html" rel="alternate"></link><updated>2015-05-17T14:35:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:ip-address-associated-with-the-default-route.html</id><summary type="html">&lt;p&gt;Need a way to determine the &lt;span class="caps"&gt;IP&lt;/span&gt; address which would be used for outbound communication without actually making any outbound connections? Here&amp;#8217;s one&amp;nbsp;method.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Hint:&lt;/em&gt; To create an actual tab character on the shell type &lt;code&gt;Ctrl+v Ctrl+i&lt;/code&gt;.&lt;/p&gt;</summary><category term="wireshark"></category><category term="tshark"></category><category term="SIP"></category><category term="VoIP"></category><category term="networking"></category></entry><entry><title>IP address associated with the default route</title><link href="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html" rel="alternate"></link><published>2015-05-17T14:35:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:ip-address-associated-with-the-default-route.html</id><summary type="html">&lt;p&gt;Need a way to determine the &lt;span class="caps"&gt;IP&lt;/span&gt; address which would be used for outbound communication without actually making any outbound connections? Here&amp;#8217;s one&amp;nbsp;method.&lt;/p&gt;
 &lt;p&gt;Tested on Debian, CoreOS, CentOS, and &lt;span class="caps"&gt;OSX&lt;/span&gt;&amp;nbsp;Yosemite.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ifconfig &lt;span class="k"&gt;$(&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ifconfig &lt;span class="k"&gt;$(&lt;/span&gt;
   &lt;span class="o"&gt;{&lt;/span&gt; route get 4.2.2.2 &lt;span class="o"&gt;||&lt;/span&gt; route -n&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; 2&amp;gt;/dev/null &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     awk &lt;span class="s1"&gt;&amp;#39;/UG/ {print $8}; /interface:/ {print $2}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; head -n 1
 &lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;/inet / {print $2}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sed -e &lt;span class="s1"&gt;&amp;#39;s/addr://&amp;#39;&lt;/span&gt;

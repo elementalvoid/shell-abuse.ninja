@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,8 @@
 
     <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
 
 
     <link href="http://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
@@ -14,8 +15,18 @@
 
 
   <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <meta name="author" content="Matt Klich - Chief Abuser" />
 <meta name="description" content="Wouldn’t it be nice if you could run docker compose instead of docker-compose? What about Docker Machine? You can!" />
@@ -33,6 +44,7 @@
 <meta property="article:tag" content="docker"/>
 <meta property="article:tag" content="git"/>
 <meta property="og:image" content="/images/elementalvoid-avatar.png">
+
   <title>Shell Abuse &ndash; Docker commands - the git way</title>
 </head>
 <body>
@@ -42,11 +54,9 @@
         <img src="/images/elementalvoid-avatar.png" alt="" title="">
       </a>
       <h1><a href="http://shell-abuse.ninja"></a></h1>
-      <p>Bending the shell to your whim - occasionally with abandon.</p>
-      <nav>
-        <ul class="list">
-        </ul>
-      </nav>
+
+<p>Bending the shell to your whim - occasionally with abandon.</p>
+
       <ul class="social">
         <li><a class="sc-linkedin" href="https://www.linkedin.com/in/mattklich" target="_blank"><i class="fa fa-linkedin"></i></a></li>
         <li><a class="sc-github" href="https://github.com/elementalvoid" target="_blank"><i class="fa fa-github"></i></a></li>
@@ -58,21 +68,31 @@
   </aside>
   <main>
     <nav>
-      <a href="http://shell-abuse.ninja">Home</a>
+      <a href="http://shell-abuse.ninja">    Home
+</a>
+
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
-      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">Atom</a>
+
+      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">    Atom
+</a>
+
     </nav>
 
 <article>
   <header>
     <h1 id="docker-commands-the-git-way">Docker commands - the git&nbsp;way</h1>
-    <p>Posted on Sat 16 May 2015 in <a href="http://shell-abuse.ninja/category/dev-tools.html">Dev Tools</a></p>
+    <p>
+          Posted on Sat 16 May 2015 in <a href="http://shell-abuse.ninja/category/dev-tools.html">Dev Tools</a>
+
+
+        &#8226; 1 min read
+    </p>
   </header>
   <div>
     <p>Wouldn&#8217;t it be nice if you could run <code>docker compose</code> instead of <code>docker-compose</code>? What about Docker Machine? You&nbsp;can!</p>
-<div class="highlight"><pre>docker <span class="o">()</span> <span class="o">{</span>
+<div class="highlight"><pre><span></span>docker <span class="o">()</span> <span class="o">{</span>
   <span class="nb">local</span> <span class="nv">cmd</span><span class="o">=</span><span class="k">$(</span><span class="nb">command</span> -v docker-<span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="k">)</span><span class="p">;</span>
   <span class="k">if</span> <span class="o">[[</span> -n <span class="si">${</span><span class="nv">cmd</span><span class="si">}</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
     shift<span class="p">;</span>
@@ -85,7 +105,7 @@
 
 
 <p>Throw that in your shell rc somewhere and&nbsp;then&#8230;</p>
-<div class="highlight"><pre>docker compose ps  <span class="c1"># &lt;-- instead of &#39;docker-compose ps&#39;</span>
+<div class="highlight"><pre><span></span>docker compose ps  <span class="c1"># &lt;-- instead of &#39;docker-compose ps&#39;</span>
        Name                      Command               State                    Ports
 -------------------------------------------------------------------------------------------------------
 dockerghost_ghost_1   /entrypoint.sh npm start - ...   Up      2368/tcp
@@ -95,7 +115,7 @@ dockerghost_nginx_1   /usr/bin/reefer -t /templa ...   Up      0.0.0.0:443-&gt;4
 
 <hr />
 <p>Create your own commands - yours should be a little less&nbsp;pointless.</p>
-<div class="highlight"><pre><span class="c1"># Create a custom docker wrapper</span>
+<div class="highlight"><pre><span></span><span class="c1"># Create a custom docker wrapper</span>
 docker-foo <span class="o">()</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s1">&#39; :: Hi there! ::&#39;</span><span class="p">;</span> <span class="o">}</span>
 <span class="c1"># And run it</span>
 docker foo
@@ -108,12 +128,16 @@ docker foo
       <a href="http://shell-abuse.ninja/tag/git.html">git</a>
     </p>
   </div>
+
+
   <div class="related-posts">
-    <h4>Related posts:</h4>
-    <ul>
+    <h4>    You might enjoy
+</h4>
+    <ul class="related-posts">
       <li><a href="http://shell-abuse.ninja/getting-to-the-root-of-you-git.html">Getting to the root of your&nbsp;Git</a></li>
     </ul>
   </div>
+
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';
@@ -123,12 +147,16 @@ docker foo
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
 </article>
 
     <footer>
-        <p>&copy; Matt Klich - Chief Abuser </p>
-<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy; Matt Klich - Chief Abuser </p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 <!-- Google Analytics -->
@@ -147,20 +175,13 @@ docker foo
 
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "name": "Docker commands - the git way",
-  "headline": "Docker commands - the git way",
-  "datePublished": "2015-05-16 22:20:00-06:00",
-  "dateModified": "",
-  "author": {
-    "@type": "Person",
-    "name": "Matt Klich - Chief Abuser",
-    "url": "http://shell-abuse.ninja/author/matt-klich-chief-abuser.html"
-  },
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Shell Abuse ",
+  "url" : "http://shell-abuse.ninja",
   "image": "/images/elementalvoid-avatar.png",
-  "url": "http://shell-abuse.ninja/docker-commands-the-git-way.html",
-  "description": "Wouldn’t it be nice if you could run docker compose instead of docker-compose? What about Docker Machine? You can!"
+  "description": ""
 }
-</script></body>
+</script>
+</body>
 </html>

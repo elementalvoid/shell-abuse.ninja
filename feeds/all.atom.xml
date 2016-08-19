@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/all.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2016-08-17T13:12:00-06:00</updated><entry><title>What the Grok!? - A Python script to convert grok epxressions to regex</title><link href="http://shell-abuse.ninja/what-the-grok-regex-convertor.html" rel="alternate"></link><updated>2016-08-17T13:12:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-08-17:what-the-grok-regex-convertor.html</id><summary type="html">&lt;h2&gt;What is&amp;nbsp;Grok?&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/all.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2016-08-17T13:12:00-06:00</updated><entry><title>What the Grok!? - A Python script to convert grok epxressions to regex</title><link href="http://shell-abuse.ninja/what-the-grok-regex-convertor.html" rel="alternate"></link><published>2016-08-17T13:12:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-08-17:what-the-grok-regex-convertor.html</id><summary type="html">&lt;h2&gt;What is&amp;nbsp;Grok?&lt;/h2&gt;
 &lt;p&gt;If you&amp;#8217;ve never used &lt;a href="https://github.com/jordansissel/grok"&gt;Grok&lt;/a&gt; you&amp;#8217;re missing out. It&amp;#8217;s fantastic for
 parsing (semi-?)structured data using regular expressions. The basic premise is that you construct a complex
 expression by peicing together smaller epxressions. Each expression could actually be a raw regex, a
 collection of other expressions, or a mix of&amp;nbsp;both.&lt;/p&gt;
 &lt;h2&gt;A simple&amp;nbsp;example&lt;/h2&gt;
 &lt;p&gt;Say you had a simple log message with an &lt;span class="caps"&gt;ISO8601&lt;/span&gt;&amp;nbsp;timestamp:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;2016-08-17 20:07:22 - Hello there
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;2016-08-17 20:07:22 - Hello there
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -18,7 +18,7 @@ your cat is a&amp;nbsp;monster.&lt;/p&gt;
 &lt;h3&gt;Enter Regex - You&amp;#8217;re winning&amp;nbsp;already!&lt;/h3&gt;
 &lt;p&gt;Oh. Wait. Nope, it&amp;#8217;s not quite that easy. Unless you really like regex you&amp;#8217;re probably going to be lazy and
 skip the part of the spec that said you needed each component of the date. You&amp;#8217;ll end up with something like&amp;nbsp;this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;^(?&amp;lt;date&amp;gt;[^\s]+) (?&amp;lt;time&amp;gt;[^\s]+) - (?&amp;lt;message&amp;gt;.*)$
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;^(?&amp;lt;date&amp;gt;[^\s]+) (?&amp;lt;time&amp;gt;[^\s]+) - (?&amp;lt;message&amp;gt;.*)$
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -28,7 +28,7 @@ skip the part of the spec that said you needed each component of the date. You&a
 &lt;p&gt;Keep in mind this example is fairly trivial. Using Grok we have access to a &lt;a href="https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns"&gt;library of prebuilt patterns&lt;/a&gt;
 for things like dates, numbers, text,&amp;nbsp;etc.&lt;/p&gt;
 &lt;p&gt;Here&amp;#8217;s our Grok&amp;nbsp;pattern:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%{TIMESTAMP_ISO8601} - %{GREEDYDATA}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%{TIMESTAMP_ISO8601} - %{GREEDYDATA}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -36,12 +36,12 @@ for things like dates, numbers, text,&amp;nbsp;etc.&lt;/p&gt;
 though and meet all of our&amp;nbsp;requirements.&lt;/p&gt;
 &lt;p&gt;Let&amp;#8217;s break down the &lt;code&gt;TIMESTAMP_ISO8601&lt;/code&gt; pattern. You&amp;#8217;ll find it defined in the
 &lt;a href="https://github.com/logstash-plugins/logstash-patterns-core/blob/master/patterns/grok-patterns"&gt;grok-patterns&lt;/a&gt;&amp;nbsp;file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Let&amp;#8217;s just enhance that a&amp;nbsp;bit.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%{YEAR:year}-%{MONTHNUM:month}-%{MONTHDAY:day}[T ]%{HOUR:hour}:?%{MINUTE:minute}(?::?%{SECOND:second})?%{ISO8601_TIMEZONE:timezone}? - %{GREEDYDATA:message}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%{YEAR:year}-%{MONTHNUM:month}-%{MONTHDAY:day}[T ]%{HOUR:hour}:?%{MINUTE:minute}(?::?%{SECOND:second})?%{ISO8601_TIMEZONE:timezone}? - %{GREEDYDATA:message}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -54,7 +54,7 @@ parse. However, when you&amp;#8217;re limited to using regex it quickly becomes 
 we have a prebuilt pattern to parse HAProxy&amp;nbsp;logs.&lt;/p&gt;
 &lt;p&gt;The log format is also &lt;a href="http://cbonte.github.io/haproxy-dconv/1.6/configuration.html#8.2.3"&gt;very well documented&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Let&amp;#8217;s see what a log line looks like (line breaks&amp;nbsp;added):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Feb  6 12:14:14 localhost \
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Feb  6 12:14:14 localhost \
       haproxy[14389]: 10.0.1.2:33317 [06/Feb/2009:12:14:14.655] http-in \
             static/srv1 10/0/30/69/109 200 2750 - - ---- 1/1/1/1/0 0/0 {1wt.eu} \
                   {} &amp;quot;GET /index.html HTTP/1.1&amp;quot;
@@ -62,7 +62,7 @@ we have a prebuilt pattern to parse HAProxy&amp;nbsp;logs.&lt;/p&gt;
 
 
 &lt;p&gt;Lot&amp;#8217;s of work went into this behind the scenes so that all we need is this Grok&amp;nbsp;pattern:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%{HAPROXYHTTP}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%{HAPROXYHTTP}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -74,7 +74,7 @@ other tool. Unfortunately, I was unable to find anything that would provide the 
 &lt;p&gt;Before we see the code, let&amp;#8217;s see what it can&amp;nbsp;do!&lt;/p&gt;
 &lt;h3&gt;How about an &lt;span class="caps"&gt;IP&lt;/span&gt;&amp;nbsp;address?&lt;/h3&gt;
 &lt;p&gt;Let&amp;#8217;s see what the regex looks like for an &lt;span class="caps"&gt;IP&lt;/span&gt;&amp;nbsp;address:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# First, clone the patterns repo
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# First, clone the patterns repo
 git clone git@github.com:logstash-plugins/logstash-patterns-core.git
 
 # And run the tool
@@ -86,14 +86,14 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
 &lt;p&gt;Wow, that&amp;#8217;s a lot of regex! But, it&amp;#8217;ll match both &lt;span class="caps"&gt;IPV4&lt;/span&gt; and &lt;span class="caps"&gt;IPV6&lt;/span&gt; addresses and I didn&amp;#8217;t do any &lt;em&gt;real&lt;/em&gt; work. :&amp;nbsp;)&lt;/p&gt;
 &lt;h3&gt;Back to HAProxy logs for a&amp;nbsp;moment&lt;/h3&gt;
 &lt;p&gt;Since this all started with HAProxy logs lets see what they look&amp;nbsp;like.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;./grok-to-regex.py -d logstash-patterns-core/patterns/ &amp;#39;%{HAPROXYHTTP}&amp;#39;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./grok-to-regex.py -d logstash-patterns-core/patterns/ &amp;#39;%{HAPROXYHTTP}&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;For the sake of your eyes I&amp;#8217;m not going to insert the output here. Instead, let&amp;#8217;s take a look at it on &lt;a href="://regex101.com/r/hY7zK0/2"&gt;regex101.com&lt;/a&gt;&amp;nbsp;again.&lt;/p&gt;
 &lt;h3&gt;And now, finally, the&amp;nbsp;code&lt;/h3&gt;
 &lt;p&gt;It&amp;#8217;s pure python and doesn&amp;#8217;t depend on any extra bits and peices. I suspect, though &lt;span class="caps"&gt;YMMV&lt;/span&gt;, that it will work on Windows&amp;nbsp;too.&lt;/p&gt;
-&lt;script src="https://gist.github.com/elementalvoid/59afc405f2f5726ad1980e8d8178536b.js"&gt;&lt;/script&gt;</summary><category term="regex"></category><category term="grok"></category><category term="python"></category><category term="haproxy"></category></entry><entry><title>Serial Over LAN (SOL) - Java’s dead!</title><link href="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html" rel="alternate"></link><updated>2016-02-03T16:27:00-07:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-02-03:serial-over-lan-sol-javas-dead.html</id><summary type="html">&lt;p&gt;I&amp;#8217;ve been a sysadmin and worked with sysadmins for years but we&amp;#8217;ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove &lt;span class="caps"&gt;LAN&lt;/span&gt; (&lt;span class="caps"&gt;SOL&lt;/span&gt;) using &lt;span class="caps"&gt;IPMI&lt;/span&gt;. Turns out, its &lt;em&gt;super&lt;/em&gt;&amp;nbsp;easy!&lt;/p&gt;
+&lt;script src="https://gist.github.com/elementalvoid/59afc405f2f5726ad1980e8d8178536b.js"&gt;&lt;/script&gt;</summary><category term="regex"></category><category term="grok"></category><category term="python"></category><category term="haproxy"></category></entry><entry><title>Serial Over LAN (SOL) - Java’s dead!</title><link href="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html" rel="alternate"></link><published>2016-02-03T16:27:00-07:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-02-03:serial-over-lan-sol-javas-dead.html</id><summary type="html">&lt;p&gt;I&amp;#8217;ve been a sysadmin and worked with sysadmins for years but we&amp;#8217;ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove &lt;span class="caps"&gt;LAN&lt;/span&gt; (&lt;span class="caps"&gt;SOL&lt;/span&gt;) using &lt;span class="caps"&gt;IPMI&lt;/span&gt;. Turns out, its &lt;em&gt;super&lt;/em&gt;&amp;nbsp;easy!&lt;/p&gt;
 &lt;p&gt;So, I&amp;#8217;ve written up some simple instructions to configure &lt;span class="caps"&gt;SOL&lt;/span&gt; on Ubuntu Trusty (14.somethingorother). One super important thing to keep in mind is that the bit rates configured at each step need to be the&amp;nbsp;same.&lt;/p&gt;
 &lt;p&gt;Assumption: You&amp;#8217;re using sudo liberally or, like my favorite &lt;span class="caps"&gt;SA&lt;/span&gt;, you just drop into a root shell and stay there.&amp;nbsp;Forever.&lt;/p&gt;
 &lt;h2&gt;Bios&amp;nbsp;Redirection&lt;/h2&gt;
@@ -102,7 +102,7 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
 &lt;h2&gt;Grub and Linux Kernel Space&amp;nbsp;Redirection&lt;/h2&gt;
 &lt;p&gt;These settings allow you to see and manipulate Grub and to see kernel level boot&amp;nbsp;messages.&lt;/p&gt;
 &lt;p&gt;Ensure the following are configured in &lt;code&gt;/etc/default/grub&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# Enable kernel space redirection so you can see kernel boot messages.
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# Enable kernel space redirection so you can see kernel boot messages.
 GRUB_CMDLINE_LINUX=&amp;quot;console=tty0 console=ttyS1,115200n8&amp;quot;
 
 # Enable Grub to be seen over SOL.
@@ -117,7 +117,7 @@ GRUB_SERIAL_COMMAND=&amp;quot;serial --speed=115200 --unit=1 --word=8 --parity=n
 &lt;h2&gt;Linux User Space&amp;nbsp;Redirection&lt;/h2&gt;
 &lt;p&gt;Once the kernel hands things over to user space we need to redirect a virtual terminal to the serial&amp;nbsp;port.&lt;/p&gt;
 &lt;p&gt;Create &lt;code&gt;/etc/init/ttyS1.conf&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# ttyS1 - getty
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# ttyS1 - getty
 #
 # This service maintains a getty on ttyS1 from the point the system is
 # started until it is shut down again.
@@ -133,7 +133,7 @@ exec /sbin/getty -L ttyS1 115200 vt102
 &lt;p&gt;And start it: &lt;code&gt;service ttyS1 start&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;I&amp;#8217;m not sure what this would look like for Debian. Stupid Ubuntu I’m on is using&amp;nbsp;upstart.&lt;/p&gt;
 &lt;p&gt;Install and configure &lt;code&gt;ipmitool&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;apt-get install ipmitool
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get install ipmitool
 ipmitool sol &lt;span class="nb"&gt;set&lt;/span&gt; non-volatile-bit-rate 115.2 1
 ipmitool sol &lt;span class="nb"&gt;set&lt;/span&gt; volatile-bit-rate 115.2 1
 &lt;/pre&gt;&lt;/div&gt;
@@ -141,7 +141,7 @@ ipmitool sol &lt;span class="nb"&gt;set&lt;/span&gt; volatile-bit-rate 115.2 1
 
 &lt;h2&gt;What&amp;#8217;s the point if you can&amp;#8217;t use&amp;nbsp;it?&lt;/h2&gt;
 &lt;p&gt;On a Mac with brew.sh installed and&amp;nbsp;functioning:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;brew install freeipmi
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install freeipmi
 &lt;span class="c1"&gt;# -P prompts for the password&lt;/span&gt;
 &lt;span class="c1"&gt;# -e &amp;#39;~&amp;#39; sets the escape character to match SSH&amp;#39;s&lt;/span&gt;
 ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &lt;span class="s1"&gt;&amp;#39;~&amp;#39;&lt;/span&gt;
@@ -154,8 +154,8 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e &lt;span class="s1"&gt;&amp;#39;~&
 &lt;li&gt;https://help.ubuntu.com/community/SerialConsoleHowto&lt;/li&gt;
 &lt;li&gt;http://www.alleft.com/sysadmin/ipmi-sol-inexpensive-remote-console/&lt;/li&gt;
 &lt;li&gt;ftp://ftp.supermicro.com/utility/SMCIPMItool/Linux/&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="ipmi"></category><category term="linux"></category><category term="java"></category><category term="sol"></category><category term="remote console"></category><category term="serial over lan"></category></entry><entry><title>Capturing and filtering SIP/RTP data with tshark</title><link href="http://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html" rel="alternate"></link><updated>2015-08-04T13:51:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-08-04:capturing-and-filtering-sip_rtp-data-with-tshark.html</id><summary type="html">&lt;p&gt;When filing issues with my &lt;span class="caps"&gt;SIP&lt;/span&gt; trunk provider they usually want some sort of call record to help track/troubleshoot the issue. In my case I don&amp;#8217;t have any eavesdropping concerns as all the calls are with family members. So, I use tshark to grab a ring buffer of &lt;span class="caps"&gt;RTP&lt;/span&gt;/&lt;span class="caps"&gt;SIP&lt;/span&gt; data as&amp;nbsp;follows:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# ensure that the dumpcap binary has the proper Linux capabilities&lt;/span&gt;
+&lt;/ul&gt;</summary><category term="ipmi"></category><category term="linux"></category><category term="java"></category><category term="sol"></category><category term="remote console"></category><category term="serial over lan"></category></entry><entry><title>Capturing and filtering SIP/RTP data with tshark</title><link href="http://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html" rel="alternate"></link><published>2015-08-04T13:51:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-08-04:capturing-and-filtering-sip_rtp-data-with-tshark.html</id><summary type="html">&lt;p&gt;When filing issues with my &lt;span class="caps"&gt;SIP&lt;/span&gt; trunk provider they usually want some sort of call record to help track/troubleshoot the issue. In my case I don&amp;#8217;t have any eavesdropping concerns as all the calls are with family members. So, I use tshark to grab a ring buffer of &lt;span class="caps"&gt;RTP&lt;/span&gt;/&lt;span class="caps"&gt;SIP&lt;/span&gt; data as&amp;nbsp;follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ensure that the dumpcap binary has the proper Linux capabilities&lt;/span&gt;
 /sbin/setcap &lt;span class="s1"&gt;&amp;#39;CAP_NET_RAW+eip CAP_NET_ADMIN+eip&amp;#39;&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Grab SIP and related RTP packets and store them in a ring buffer&lt;/span&gt;
@@ -178,13 +178,13 @@ tshark &lt;span class="se"&gt;\&lt;/span&gt;
 &lt;p&gt;The filter comes straight from the Freeswitch wiki page on &lt;a href="https://freeswitch.org/confluence/display/FREESWITCH/Packet+Capture#PacketCapture-tsharkakatethereal"&gt;packet capturing&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Of course all of that is wrapped up in a service script that starts/stops the capture and performs tool installation and cron-based&amp;nbsp;cleanup.&lt;/p&gt;
 &lt;p&gt;Since this creates multiple reasonably sized capture files I generally need to merge some in order to filter on the correct time&amp;nbsp;range:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# create a single file for all of 20150804&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# create a single file for all of 20150804&lt;/span&gt;
 mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;To build a list of all &lt;span class="caps"&gt;SIP&lt;/span&gt; &lt;span class="caps"&gt;BYE&lt;/span&gt;&amp;nbsp;messages:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;tshark &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tshark &lt;span class="se"&gt;\&lt;/span&gt;
  -n &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Disable network object name resolution&lt;/span&gt;
  -N nN &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# Turn on name resolving only for network address resolution using external resolvers (e.g., DNS)&lt;/span&gt;
  -W n &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="c1"&gt;# save host name resolution records along with captured packets.&lt;/span&gt;
@@ -204,7 +204,7 @@ mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;em&gt;Hint:&lt;/em&gt; To create an actual tab character on the shell type &lt;code&gt;Ctrl+v Ctrl+i&lt;/code&gt;.&lt;/p&gt;</summary><category term="wireshark"></category><category term="tshark"></category><category term="SIP"></category><category term="VoIP"></category><category term="networking"></category></entry><entry><title>Getting to the root of your Git</title><link href="http://shell-abuse.ninja/getting-to-the-root-of-you-git.html" rel="alternate"></link><updated>2015-05-17T14:47:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:getting-to-the-root-of-you-git.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;function&lt;/span&gt; gcd &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;p&gt;&lt;em&gt;Hint:&lt;/em&gt; To create an actual tab character on the shell type &lt;code&gt;Ctrl+v Ctrl+i&lt;/code&gt;.&lt;/p&gt;</summary><category term="wireshark"></category><category term="tshark"></category><category term="SIP"></category><category term="VoIP"></category><category term="networking"></category></entry><entry><title>Getting to the root of your Git</title><link href="http://shell-abuse.ninja/getting-to-the-root-of-you-git.html" rel="alternate"></link><published>2015-05-17T14:47:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:getting-to-the-root-of-you-git.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; gcd &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="k"&gt;if&lt;/span&gt; which git &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
     &lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git status 2&amp;gt;/dev/null&lt;span class="k"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -z &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
@@ -218,20 +218,20 @@ mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
 
 
 &lt;p&gt;Tab&amp;nbsp;completion!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;function&lt;/span&gt; _git_cd &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; _git_cd &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;which git &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
     &lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git status 2&amp;gt;/dev/null&lt;span class="k"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -z &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
       &lt;span class="k"&gt;return&lt;/span&gt;
     &lt;span class="k"&gt;fi&lt;/span&gt;
     &lt;span class="nv"&gt;TARGET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;./&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;command&lt;/span&gt; git rev-parse --show-cdup&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -d $TARGET &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-      &lt;span class="nv"&gt;TARGET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;$&lt;span class="s2"&gt;TARGET/&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -d &lt;span class="nv"&gt;$TARGET&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+      &lt;span class="nv"&gt;TARGET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$TARGET&lt;/span&gt;&lt;span class="s2"&gt;/&amp;quot;&lt;/span&gt;
     &lt;span class="k"&gt;fi&lt;/span&gt;
     &lt;span class="nv"&gt;COMPREPLY&lt;/span&gt;&lt;span class="o"&gt;=()&lt;/span&gt;
     &lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;COMP_WORDS&lt;/span&gt;&lt;span class="p"&gt;[COMP_CWORD]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
     &lt;span class="nv"&gt;prev&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;COMP_WORDS&lt;/span&gt;&lt;span class="p"&gt;[COMP_CWORD-1]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
-    &lt;span class="nv"&gt;opts&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; $TARGET&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;compgen&lt;/span&gt; -d -o dirnames -S / -X &lt;span class="s1"&gt;&amp;#39;@(*/.git|*/.git/|.git|.git/)&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;opts&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="nv"&gt;$TARGET&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;compgen&lt;/span&gt; -d -o dirnames -S / -X &lt;span class="s1"&gt;&amp;#39;@(*/.git|*/.git/|.git|.git/)&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; * &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
       &lt;span class="nv"&gt;COMPREPLY&lt;/span&gt;&lt;span class="o"&gt;=(&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;compgen&lt;/span&gt; -W &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;opts&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -- &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="o"&gt;)&lt;/span&gt;
       &lt;span class="k"&gt;return&lt;/span&gt; 0
@@ -242,18 +242,18 @@ mergecap -w all.pcapng sip-rtp_*_20150804*.pcap
 
 
 &lt;p&gt;Usage:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ls -d .git  &lt;span class="c1"&gt;# &amp;lt;- we&amp;#39;re in the root&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls -d .git  &lt;span class="c1"&gt;# &amp;lt;- we&amp;#39;re in the root&lt;/span&gt;
 mkdir -p a/b/c d/e/f
 &lt;span class="nb"&gt;cd&lt;/span&gt; a/b/c
 gcd d&amp;lt;TAB&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="git"></category><category term="bash"></category><category term="util"></category></entry><entry><title>IP address associated with the default route</title><link href="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html" rel="alternate"></link><updated>2015-05-17T14:35:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:ip-address-associated-with-the-default-route.html</id><summary type="html">&lt;p&gt;Need a way to determine the &lt;span class="caps"&gt;IP&lt;/span&gt; address which would be used for outbound communication without actually making any outbound connections? Here&amp;#8217;s one&amp;nbsp;method.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="git"></category><category term="bash"></category><category term="util"></category></entry><entry><title>IP address associated with the default route</title><link href="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html" rel="alternate"></link><published>2015-05-17T14:35:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:ip-address-associated-with-the-default-route.html</id><summary type="html">&lt;p&gt;Need a way to determine the &lt;span class="caps"&gt;IP&lt;/span&gt; address which would be used for outbound communication without actually making any outbound connections? Here&amp;#8217;s one&amp;nbsp;method.&lt;/p&gt;
 &lt;p&gt;Tested on Debian, CoreOS, CentOS, and &lt;span class="caps"&gt;OSX&lt;/span&gt;&amp;nbsp;Yosemite.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ifconfig &lt;span class="k"&gt;$(&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ifconfig &lt;span class="k"&gt;$(&lt;/span&gt;
   &lt;span class="o"&gt;{&lt;/span&gt; route get 4.2.2.2 &lt;span class="o"&gt;||&lt;/span&gt; route -n&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; 2&amp;gt;/dev/null &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
     awk &lt;span class="s1"&gt;&amp;#39;/UG/ {print $8}; /interface:/ {print $2}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; head -n 1
 &lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;/inet / {print $2}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sed -e &lt;span class="s1"&gt;&amp;#39;s/addr://&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="hack"></category><category term="osx"></category><category term="linux"></category><category term="networking"></category><category term="ifconfig"></category></entry><entry><title>When OSX shebang won’t use Bash 4 from brew</title><link href="http://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html" rel="alternate"></link><updated>2015-05-17T00:45:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:when-osx-shebang-wont-use-bash-4.html</id><summary type="html">&lt;p&gt;Gah! A fellow at work had a Mac that refused to run Bash 4 as installed via &lt;a href="http://brew.sh/"&gt;Brew&lt;/a&gt;. He could run &lt;code&gt;bash&lt;/code&gt; from a shell and get 4.x but no matter what we did to the shebang of our script it always ended up running Bash 3 as installed by Apple. We came up with this ugly&amp;nbsp;bit:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="ch"&gt;#!/usr/bin/env bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="hack"></category><category term="osx"></category><category term="linux"></category><category term="networking"></category><category term="ifconfig"></category></entry><entry><title>When OSX shebang won’t use Bash 4 from brew</title><link href="http://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html" rel="alternate"></link><published>2015-05-17T00:45:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:when-osx-shebang-wont-use-bash-4.html</id><summary type="html">&lt;p&gt;Gah! A fellow at work had a Mac that refused to run Bash 4 as installed via &lt;a href="http://brew.sh/"&gt;Brew&lt;/a&gt;. He could run &lt;code&gt;bash&lt;/code&gt; from a shell and get 4.x but no matter what we did to the shebang of our script it always ended up running Bash 3 as installed by Apple. We came up with this ugly&amp;nbsp;bit:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env bash&lt;/span&gt;
 &lt;span class="c1"&gt;## ensure bash 4.x&lt;/span&gt;
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;BASH_VERSION&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &amp;lt; 4.0 &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
       -x /usr/local/bin/bash &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
@@ -266,8 +266,8 @@ gcd d&amp;lt;TAB&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;It works on both Linux and&amp;nbsp;Mac.&lt;/p&gt;</summary><category term="osx"></category><category term="bash"></category><category term="ugly hack"></category></entry><entry><title>Docker commands - the git way</title><link href="http://shell-abuse.ninja/docker-commands-the-git-way.html" rel="alternate"></link><updated>2015-05-16T22:20:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-16:docker-commands-the-git-way.html</id><summary type="html">&lt;p&gt;Wouldn&amp;#8217;t it be nice if you could run &lt;code&gt;docker compose&lt;/code&gt; instead of &lt;code&gt;docker-compose&lt;/code&gt;? What about Docker Machine? You&amp;nbsp;can!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;docker &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;p&gt;It works on both Linux and&amp;nbsp;Mac.&lt;/p&gt;</summary><category term="osx"></category><category term="bash"></category><category term="ugly hack"></category></entry><entry><title>Docker commands - the git way</title><link href="http://shell-abuse.ninja/docker-commands-the-git-way.html" rel="alternate"></link><published>2015-05-16T22:20:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-16:docker-commands-the-git-way.html</id><summary type="html">&lt;p&gt;Wouldn&amp;#8217;t it be nice if you could run &lt;code&gt;docker compose&lt;/code&gt; instead of &lt;code&gt;docker-compose&lt;/code&gt;? What about Docker Machine? You&amp;nbsp;can!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;command&lt;/span&gt; -v docker-&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -n &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
     shift&lt;span class="p"&gt;;&lt;/span&gt;
@@ -280,7 +280,7 @@ gcd d&amp;lt;TAB&amp;gt;
 
 
 &lt;p&gt;Throw that in your shell rc somewhere and&amp;nbsp;then&amp;#8230;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;docker compose ps  &lt;span class="c1"&gt;# &amp;lt;-- instead of &amp;#39;docker-compose ps&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker compose ps  &lt;span class="c1"&gt;# &amp;lt;-- instead of &amp;#39;docker-compose ps&amp;#39;&lt;/span&gt;
        Name                      Command               State                    Ports
 -------------------------------------------------------------------------------------------------------
 dockerghost_ghost_1   /entrypoint.sh npm start - ...   Up      2368/tcp
@@ -290,7 +290,7 @@ dockerghost_nginx_1   /usr/bin/reefer -t /templa ...   Up      0.0.0.0:443-&amp;
 
 &lt;hr /&gt;
 &lt;p&gt;Create your own commands - yours should be a little less&amp;nbsp;pointless.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Create a custom docker wrapper&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Create a custom docker wrapper&lt;/span&gt;
 docker-foo &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; :: Hi there! ::&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;span class="c1"&gt;# And run it&lt;/span&gt;
 docker foo

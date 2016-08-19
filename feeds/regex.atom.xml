@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/regex.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2016-08-17T13:12:00-06:00</updated><entry><title>What the Grok!? - A Python script to convert grok epxressions to regex</title><link href="http://shell-abuse.ninja/what-the-grok-regex-convertor.html" rel="alternate"></link><updated>2016-08-17T13:12:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-08-17:what-the-grok-regex-convertor.html</id><summary type="html">&lt;h2&gt;What is&amp;nbsp;Grok?&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/regex.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2016-08-17T13:12:00-06:00</updated><entry><title>What the Grok!? - A Python script to convert grok epxressions to regex</title><link href="http://shell-abuse.ninja/what-the-grok-regex-convertor.html" rel="alternate"></link><published>2016-08-17T13:12:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2016-08-17:what-the-grok-regex-convertor.html</id><summary type="html">&lt;h2&gt;What is&amp;nbsp;Grok?&lt;/h2&gt;
 &lt;p&gt;If you&amp;#8217;ve never used &lt;a href="https://github.com/jordansissel/grok"&gt;Grok&lt;/a&gt; you&amp;#8217;re missing out. It&amp;#8217;s fantastic for
 parsing (semi-?)structured data using regular expressions. The basic premise is that you construct a complex
 expression by peicing together smaller epxressions. Each expression could actually be a raw regex, a
 collection of other expressions, or a mix of&amp;nbsp;both.&lt;/p&gt;
 &lt;h2&gt;A simple&amp;nbsp;example&lt;/h2&gt;
 &lt;p&gt;Say you had a simple log message with an &lt;span class="caps"&gt;ISO8601&lt;/span&gt;&amp;nbsp;timestamp:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;2016-08-17 20:07:22 - Hello there
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;2016-08-17 20:07:22 - Hello there
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -18,7 +18,7 @@ your cat is a&amp;nbsp;monster.&lt;/p&gt;
 &lt;h3&gt;Enter Regex - You&amp;#8217;re winning&amp;nbsp;already!&lt;/h3&gt;
 &lt;p&gt;Oh. Wait. Nope, it&amp;#8217;s not quite that easy. Unless you really like regex you&amp;#8217;re probably going to be lazy and
 skip the part of the spec that said you needed each component of the date. You&amp;#8217;ll end up with something like&amp;nbsp;this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;^(?&amp;lt;date&amp;gt;[^\s]+) (?&amp;lt;time&amp;gt;[^\s]+) - (?&amp;lt;message&amp;gt;.*)$
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;^(?&amp;lt;date&amp;gt;[^\s]+) (?&amp;lt;time&amp;gt;[^\s]+) - (?&amp;lt;message&amp;gt;.*)$
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -28,7 +28,7 @@ skip the part of the spec that said you needed each component of the date. You&a
 &lt;p&gt;Keep in mind this example is fairly trivial. Using Grok we have access to a &lt;a href="https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns"&gt;library of prebuilt patterns&lt;/a&gt;
 for things like dates, numbers, text,&amp;nbsp;etc.&lt;/p&gt;
 &lt;p&gt;Here&amp;#8217;s our Grok&amp;nbsp;pattern:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%{TIMESTAMP_ISO8601} - %{GREEDYDATA}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%{TIMESTAMP_ISO8601} - %{GREEDYDATA}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -36,12 +36,12 @@ for things like dates, numbers, text,&amp;nbsp;etc.&lt;/p&gt;
 though and meet all of our&amp;nbsp;requirements.&lt;/p&gt;
 &lt;p&gt;Let&amp;#8217;s break down the &lt;code&gt;TIMESTAMP_ISO8601&lt;/code&gt; pattern. You&amp;#8217;ll find it defined in the
 &lt;a href="https://github.com/logstash-plugins/logstash-patterns-core/blob/master/patterns/grok-patterns"&gt;grok-patterns&lt;/a&gt;&amp;nbsp;file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Let&amp;#8217;s just enhance that a&amp;nbsp;bit.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%{YEAR:year}-%{MONTHNUM:month}-%{MONTHDAY:day}[T ]%{HOUR:hour}:?%{MINUTE:minute}(?::?%{SECOND:second})?%{ISO8601_TIMEZONE:timezone}? - %{GREEDYDATA:message}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%{YEAR:year}-%{MONTHNUM:month}-%{MONTHDAY:day}[T ]%{HOUR:hour}:?%{MINUTE:minute}(?::?%{SECOND:second})?%{ISO8601_TIMEZONE:timezone}? - %{GREEDYDATA:message}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -54,7 +54,7 @@ parse. However, when you&amp;#8217;re limited to using regex it quickly becomes 
 we have a prebuilt pattern to parse HAProxy&amp;nbsp;logs.&lt;/p&gt;
 &lt;p&gt;The log format is also &lt;a href="http://cbonte.github.io/haproxy-dconv/1.6/configuration.html#8.2.3"&gt;very well documented&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Let&amp;#8217;s see what a log line looks like (line breaks&amp;nbsp;added):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Feb  6 12:14:14 localhost \
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Feb  6 12:14:14 localhost \
       haproxy[14389]: 10.0.1.2:33317 [06/Feb/2009:12:14:14.655] http-in \
             static/srv1 10/0/30/69/109 200 2750 - - ---- 1/1/1/1/0 0/0 {1wt.eu} \
                   {} &amp;quot;GET /index.html HTTP/1.1&amp;quot;
@@ -62,7 +62,7 @@ we have a prebuilt pattern to parse HAProxy&amp;nbsp;logs.&lt;/p&gt;
 
 
 &lt;p&gt;Lot&amp;#8217;s of work went into this behind the scenes so that all we need is this Grok&amp;nbsp;pattern:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%{HAPROXYHTTP}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;%{HAPROXYHTTP}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -74,7 +74,7 @@ other tool. Unfortunately, I was unable to find anything that would provide the 
 &lt;p&gt;Before we see the code, let&amp;#8217;s see what it can&amp;nbsp;do!&lt;/p&gt;
 &lt;h3&gt;How about an &lt;span class="caps"&gt;IP&lt;/span&gt;&amp;nbsp;address?&lt;/h3&gt;
 &lt;p&gt;Let&amp;#8217;s see what the regex looks like for an &lt;span class="caps"&gt;IP&lt;/span&gt;&amp;nbsp;address:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# First, clone the patterns repo
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# First, clone the patterns repo
 git clone git@github.com:logstash-plugins/logstash-patterns-core.git
 
 # And run the tool
@@ -86,7 +86,7 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
 &lt;p&gt;Wow, that&amp;#8217;s a lot of regex! But, it&amp;#8217;ll match both &lt;span class="caps"&gt;IPV4&lt;/span&gt; and &lt;span class="caps"&gt;IPV6&lt;/span&gt; addresses and I didn&amp;#8217;t do any &lt;em&gt;real&lt;/em&gt; work. :&amp;nbsp;)&lt;/p&gt;
 &lt;h3&gt;Back to HAProxy logs for a&amp;nbsp;moment&lt;/h3&gt;
 &lt;p&gt;Since this all started with HAProxy logs lets see what they look&amp;nbsp;like.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;./grok-to-regex.py -d logstash-patterns-core/patterns/ &amp;#39;%{HAPROXYHTTP}&amp;#39;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./grok-to-regex.py -d logstash-patterns-core/patterns/ &amp;#39;%{HAPROXYHTTP}&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;
 
 
