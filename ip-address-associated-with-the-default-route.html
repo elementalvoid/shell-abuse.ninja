@@ -2,24 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
-
-
-    <link href="http://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
-
-
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="" />
+    <meta name="robots" content="" />
 
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="https://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57473144-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#333">
     <!-- Windows Phone -->
@@ -27,19 +38,22 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333">
 
 <meta name="author" content="Matt Klich - Chief Abuser" />
 <meta name="description" content="Find the IP associated with the default route on Linux and Mac OSX." />
 <meta name="keywords" content="hack, osx, linux, networking, ifconfig">
+
 <meta property="og:site_name" content="Shell Abuse"/>
 <meta property="og:title" content="IP address associated with the default route"/>
 <meta property="og:description" content="Find the IP associated with the default route on Linux and Mac OSX."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html"/>
+<meta property="og:url" content="https://shell-abuse.ninja/ip-address-associated-with-the-default-route.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2015-05-17 14:35:00-06:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="http://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
+<meta property="article:author" content="https://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
 <meta property="article:section" content="Linux"/>
 <meta property="article:tag" content="hack"/>
 <meta property="article:tag" content="osx"/>
@@ -49,14 +63,15 @@
 <meta property="og:image" content="/images/elementalvoid-avatar.png">
 
   <title>Shell Abuse &ndash; IP address associated with the default route</title>
+
 </head>
 <body>
   <aside>
     <div>
-      <a href="http://shell-abuse.ninja">
+      <a href="https://shell-abuse.ninja">
         <img src="/images/elementalvoid-avatar.png" alt="" title="">
       </a>
-      <h1><a href="http://shell-abuse.ninja"></a></h1>
+      <h1><a href="https://shell-abuse.ninja"></a></h1>
 
 <p>Bending the shell to your whim - occasionally with abandon.</p>
 
@@ -68,61 +83,70 @@
         <li><a class="sc-rss" href="//shell-abuse.ninja/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
       </ul>
     </div>
+
+
   </aside>
   <main>
+
     <nav>
-      <a href="http://shell-abuse.ninja">    Home
+      <a href="https://shell-abuse.ninja">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">    Atom
+      <a href="https://shell-abuse.ninja/feeds/all.atom.xml">    Atom
 </a>
 
     </nav>
 
-<article>
+<article class="single">
   <header>
+      
     <h1 id="ip-address-associated-with-the-default-route"><span class="caps">IP</span> address associated with the default&nbsp;route</h1>
     <p>
-          Posted on Sun 17 May 2015 in <a href="http://shell-abuse.ninja/category/linux.html">Linux</a>
+          Posted on Sun 17 May 2015 in <a href="https://shell-abuse.ninja/category/linux.html">Linux</a>
 
 
         &#8226; 1 min read
     </p>
   </header>
+
+
   <div>
     <p>Need a way to determine the <span class="caps">IP</span> address which would be used for outbound communication without actually making any outbound connections? Here&#8217;s one&nbsp;method.</p>
 <p>Tested on Debian, CoreOS, CentOS, and <span class="caps">OSX</span>&nbsp;Yosemite.</p>
 <div class="highlight"><pre><span></span>ifconfig <span class="k">$(</span>
-  <span class="o">{</span> route get 4.2.2.2 <span class="o">||</span> route -n<span class="p">;</span> <span class="o">}</span> 2&gt;/dev/null <span class="p">|</span> <span class="se">\</span>
-    awk <span class="s1">&#39;/UG/ {print $8}; /interface:/ {print $2}&#39;</span> <span class="p">|</span> head -n 1
+  <span class="o">{</span> route get <span class="m">4</span>.2.2.2 <span class="o">||</span> route -n<span class="p">;</span> <span class="o">}</span> <span class="m">2</span>&gt;/dev/null <span class="p">|</span> <span class="se">\</span>
+    awk <span class="s1">&#39;/UG/ {print $8}; /interface:/ {print $2}&#39;</span> <span class="p">|</span> head -n <span class="m">1</span>
 <span class="k">)</span> <span class="p">|</span> awk <span class="s1">&#39;/inet / {print $2}&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/addr://&#39;</span>
 </pre></div>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="http://shell-abuse.ninja/tag/hack.html">hack</a>
-      <a href="http://shell-abuse.ninja/tag/osx.html">osx</a>
-      <a href="http://shell-abuse.ninja/tag/linux.html">linux</a>
-      <a href="http://shell-abuse.ninja/tag/networking.html">networking</a>
-      <a href="http://shell-abuse.ninja/tag/ifconfig.html">ifconfig</a>
+      <a href="https://shell-abuse.ninja/tag/hack.html">hack</a>
+      <a href="https://shell-abuse.ninja/tag/osx.html">osx</a>
+      <a href="https://shell-abuse.ninja/tag/linux.html">linux</a>
+      <a href="https://shell-abuse.ninja/tag/networking.html">networking</a>
+      <a href="https://shell-abuse.ninja/tag/ifconfig.html">ifconfig</a>
     </p>
   </div>
+
 
 
   <div class="related-posts">
     <h4>    You might enjoy
 </h4>
     <ul class="related-posts">
-      <li><a href="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html">Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!</a></li>
-      <li><a href="http://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html">Capturing and filtering <span class="caps">SIP</span>/<span class="caps">RTP</span> data with&nbsp;tshark</a></li>
-      <li><a href="http://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html">When <span class="caps">OSX</span> shebang won&#8217;t use Bash 4 from&nbsp;brew</a></li>
+      <li><a href="https://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html">Capturing and filtering <span class="caps">SIP</span>/<span class="caps">RTP</span> data with&nbsp;tshark</a></li>
+      <li><a href="https://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html">Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!</a></li>
+      <li><a href="https://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html">When <span class="caps">OSX</span> shebang won&#8217;t use Bash 4 from&nbsp;brew</a></li>
     </ul>
   </div>
 
+
+<!-- Disqus -->
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';
@@ -136,25 +160,15 @@
         Please enable JavaScript to view comments.
 
 </noscript>
+<!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy; Matt Klich - Chief Abuser </p>
+<p>&copy;  </p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
 </p>    </footer>
   </main>
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-57473144-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
 
 
 
@@ -163,10 +177,11 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Shell Abuse ",
-  "url" : "http://shell-abuse.ninja",
+  "url" : "https://shell-abuse.ninja",
   "image": "/images/elementalvoid-avatar.png",
   "description": ""
 }
 </script>
+
 </body>
 </html>

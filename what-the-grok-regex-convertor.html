@@ -2,24 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
-
-
-    <link href="http://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
-
-
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="" />
+    <meta name="robots" content="" />
 
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="https://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57473144-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#333">
     <!-- Windows Phone -->
@@ -27,19 +38,22 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333">
 
 <meta name="author" content="Matt Klich - Chief Abuser" />
 <meta name="description" content="I found myself needing to parse an HAProxy log file but was too lazy to write a proper regular expression by hand. I knew that Grok had HAProxy expressions so I wrote a tool to pull out the raw regular expression." />
 <meta name="keywords" content="regex, grok, python, haproxy">
+
 <meta property="og:site_name" content="Shell Abuse"/>
 <meta property="og:title" content="What the Grok!? - A Python script to convert grok epxressions to regex"/>
 <meta property="og:description" content="I found myself needing to parse an HAProxy log file but was too lazy to write a proper regular expression by hand. I knew that Grok had HAProxy expressions so I wrote a tool to pull out the raw regular expression."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://shell-abuse.ninja/what-the-grok-regex-convertor.html"/>
+<meta property="og:url" content="https://shell-abuse.ninja/what-the-grok-regex-convertor.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-08-17 13:12:00-06:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="http://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
+<meta property="article:author" content="https://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
 <meta property="article:section" content="Regex"/>
 <meta property="article:tag" content="regex"/>
 <meta property="article:tag" content="grok"/>
@@ -48,14 +62,15 @@
 <meta property="og:image" content="/images/elementalvoid-avatar.png">
 
   <title>Shell Abuse &ndash; What the Grok!? - A Python script to convert grok epxressions to regex</title>
+
 </head>
 <body>
   <aside>
     <div>
-      <a href="http://shell-abuse.ninja">
+      <a href="https://shell-abuse.ninja">
         <img src="/images/elementalvoid-avatar.png" alt="" title="">
       </a>
-      <h1><a href="http://shell-abuse.ninja"></a></h1>
+      <h1><a href="https://shell-abuse.ninja"></a></h1>
 
 <p>Bending the shell to your whim - occasionally with abandon.</p>
 
@@ -67,31 +82,37 @@
         <li><a class="sc-rss" href="//shell-abuse.ninja/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
       </ul>
     </div>
+
+
   </aside>
   <main>
+
     <nav>
-      <a href="http://shell-abuse.ninja">    Home
+      <a href="https://shell-abuse.ninja">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">    Atom
+      <a href="https://shell-abuse.ninja/feeds/all.atom.xml">    Atom
 </a>
 
     </nav>
 
-<article>
+<article class="single">
   <header>
+      
     <h1 id="what-the-grok-regex-convertor">What the Grok!? - A Python script to convert grok epxressions to&nbsp;regex</h1>
     <p>
-          Posted on Wed 17 August 2016 in <a href="http://shell-abuse.ninja/category/regex.html">Regex</a>
+          Posted on Wed 17 August 2016 in <a href="https://shell-abuse.ninja/category/regex.html">Regex</a>
 
 
         &#8226; 3 min read
     </p>
   </header>
+
+
   <div>
     <h2>What is&nbsp;Grok?</h2>
 <p>If you&#8217;ve never used <a href="https://github.com/jordansissel/grok">Grok</a> you&#8217;re missing out. It&#8217;s fantastic for
@@ -191,15 +212,18 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="http://shell-abuse.ninja/tag/regex.html">regex</a>
-      <a href="http://shell-abuse.ninja/tag/grok.html">grok</a>
-      <a href="http://shell-abuse.ninja/tag/python.html">python</a>
-      <a href="http://shell-abuse.ninja/tag/haproxy.html">haproxy</a>
+      <a href="https://shell-abuse.ninja/tag/regex.html">regex</a>
+      <a href="https://shell-abuse.ninja/tag/grok.html">grok</a>
+      <a href="https://shell-abuse.ninja/tag/python.html">python</a>
+      <a href="https://shell-abuse.ninja/tag/haproxy.html">haproxy</a>
     </p>
   </div>
 
 
 
+
+
+<!-- Disqus -->
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';
@@ -213,25 +237,15 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
         Please enable JavaScript to view comments.
 
 </noscript>
+<!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy; Matt Klich - Chief Abuser </p>
+<p>&copy;  </p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
 </p>    </footer>
   </main>
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-57473144-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
 
 
 
@@ -240,10 +254,11 @@ git clone git@github.com:logstash-plugins/logstash-patterns-core.git
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Shell Abuse ",
-  "url" : "http://shell-abuse.ninja",
+  "url" : "https://shell-abuse.ninja",
   "image": "/images/elementalvoid-avatar.png",
   "description": ""
 }
 </script>
+
 </body>
 </html>

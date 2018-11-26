@@ -2,24 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
-
-
-    <link href="http://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
-
-
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="" />
+    <meta name="robots" content="" />
 
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="https://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57473144-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#333">
     <!-- Windows Phone -->
@@ -27,19 +38,22 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333">
 
 <meta name="author" content="Matt Klich - Chief Abuser" />
 <meta name="description" content="I’ve been a sysadmin and worked with sysadmins for years but we’ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove LAN (SOL) using IPMI. Turns out, its super easy!" />
 <meta name="keywords" content="ipmi, linux, java, sol, remote console, serial over lan">
+
 <meta property="og:site_name" content="Shell Abuse"/>
 <meta property="og:title" content="Serial Over LAN (SOL) - Java’s dead!"/>
 <meta property="og:description" content="I’ve been a sysadmin and worked with sysadmins for years but we’ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove LAN (SOL) using IPMI. Turns out, its super easy!"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html"/>
+<meta property="og:url" content="https://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-02-03 16:27:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="http://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
+<meta property="article:author" content="https://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
 <meta property="article:section" content="Linux"/>
 <meta property="article:tag" content="ipmi"/>
 <meta property="article:tag" content="linux"/>
@@ -50,14 +64,15 @@
 <meta property="og:image" content="/images/elementalvoid-avatar.png">
 
   <title>Shell Abuse &ndash; Serial Over LAN (SOL) - Java’s dead!</title>
+
 </head>
 <body>
   <aside>
     <div>
-      <a href="http://shell-abuse.ninja">
+      <a href="https://shell-abuse.ninja">
         <img src="/images/elementalvoid-avatar.png" alt="" title="">
       </a>
-      <h1><a href="http://shell-abuse.ninja"></a></h1>
+      <h1><a href="https://shell-abuse.ninja"></a></h1>
 
 <p>Bending the shell to your whim - occasionally with abandon.</p>
 
@@ -69,31 +84,37 @@
         <li><a class="sc-rss" href="//shell-abuse.ninja/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
       </ul>
     </div>
+
+
   </aside>
   <main>
+
     <nav>
-      <a href="http://shell-abuse.ninja">    Home
+      <a href="https://shell-abuse.ninja">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">    Atom
+      <a href="https://shell-abuse.ninja/feeds/all.atom.xml">    Atom
 </a>
 
     </nav>
 
-<article>
+<article class="single">
   <header>
+      
     <h1 id="serial-over-lan-sol-javas-dead">Serial Over <span class="caps">LAN</span> (<span class="caps">SOL</span>) - Java&#8217;s&nbsp;dead!</h1>
     <p>
-          Posted on Wed 03 February 2016 in <a href="http://shell-abuse.ninja/category/linux.html">Linux</a>
+          Posted on Wed 03 February 2016 in <a href="https://shell-abuse.ninja/category/linux.html">Linux</a>
 
 
         &#8226; 2 min read
     </p>
   </header>
+
+
   <div>
     <p>I&#8217;ve been a sysadmin and worked with sysadmins for years but we&#8217;ve always used the cruddy Java applet interfaces to the remote consoles. I started a new job recently and was fed up with it. So, I went about learning how to do Serial Ove <span class="caps">LAN</span> (<span class="caps">SOL</span>) using <span class="caps">IPMI</span>. Turns out, its <em>super</em>&nbsp;easy!</p>
 <p>So, I&#8217;ve written up some simple instructions to configure <span class="caps">SOL</span> on Ubuntu Trusty (14.somethingorother). One super important thing to keep in mind is that the bit rates configured at each step need to be the&nbsp;same.</p>
@@ -136,8 +157,8 @@ exec /sbin/getty -L ttyS1 115200 vt102
 <p>I&#8217;m not sure what this would look like for Debian. Stupid Ubuntu I’m on is using&nbsp;upstart.</p>
 <p>Install and configure <code>ipmitool</code>.</p>
 <div class="highlight"><pre><span></span>apt-get install ipmitool
-ipmitool sol <span class="nb">set</span> non-volatile-bit-rate 115.2 1
-ipmitool sol <span class="nb">set</span> volatile-bit-rate 115.2 1
+ipmitool sol <span class="nb">set</span> non-volatile-bit-rate <span class="m">115</span>.2 <span class="m">1</span>
+ipmitool sol <span class="nb">set</span> volatile-bit-rate <span class="m">115</span>.2 <span class="m">1</span>
 </pre></div>
 
 
@@ -160,24 +181,27 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e <span class="s1">&#39;~&#39;</span
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="http://shell-abuse.ninja/tag/ipmi.html">ipmi</a>
-      <a href="http://shell-abuse.ninja/tag/linux.html">linux</a>
-      <a href="http://shell-abuse.ninja/tag/java.html">java</a>
-      <a href="http://shell-abuse.ninja/tag/sol.html">sol</a>
-      <a href="http://shell-abuse.ninja/tag/remote-console.html">remote console</a>
-      <a href="http://shell-abuse.ninja/tag/serial-over-lan.html">serial over lan</a>
+      <a href="https://shell-abuse.ninja/tag/ipmi.html">ipmi</a>
+      <a href="https://shell-abuse.ninja/tag/linux.html">linux</a>
+      <a href="https://shell-abuse.ninja/tag/java.html">java</a>
+      <a href="https://shell-abuse.ninja/tag/sol.html">sol</a>
+      <a href="https://shell-abuse.ninja/tag/remote-console.html">remote console</a>
+      <a href="https://shell-abuse.ninja/tag/serial-over-lan.html">serial over lan</a>
     </p>
   </div>
+
 
 
   <div class="related-posts">
     <h4>    You might enjoy
 </h4>
     <ul class="related-posts">
-      <li><a href="http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html"><span class="caps">IP</span> address associated with the default&nbsp;route</a></li>
+      <li><a href="https://shell-abuse.ninja/ip-address-associated-with-the-default-route.html"><span class="caps">IP</span> address associated with the default&nbsp;route</a></li>
     </ul>
   </div>
 
+
+<!-- Disqus -->
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';
@@ -191,25 +215,15 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e <span class="s1">&#39;~&#39;</span
         Please enable JavaScript to view comments.
 
 </noscript>
+<!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy; Matt Klich - Chief Abuser </p>
+<p>&copy;  </p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
 </p>    </footer>
   </main>
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-57473144-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
 
 
 
@@ -218,10 +232,11 @@ ipmiconsole -h rack2-spare-adm -u ADMIN -P -e <span class="s1">&#39;~&#39;</span
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Shell Abuse ",
-  "url" : "http://shell-abuse.ninja",
+  "url" : "https://shell-abuse.ninja",
   "image": "/images/elementalvoid-avatar.png",
   "description": ""
 }
 </script>
+
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse</title><link href="http://shell-abuse.ninja/" rel="alternate"></link><link href="http://shell-abuse.ninja/feeds/dev-tools.atom.xml" rel="self"></link><id>http://shell-abuse.ninja/</id><updated>2015-05-17T14:47:00-06:00</updated><entry><title>Getting to the root of your Git</title><link href="http://shell-abuse.ninja/getting-to-the-root-of-you-git.html" rel="alternate"></link><published>2015-05-17T14:47:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:getting-to-the-root-of-you-git.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; gcd &lt;span class="o"&gt;{&lt;/span&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Shell Abuse - Dev Tools</title><link href="https://shell-abuse.ninja/" rel="alternate"></link><link href="https://shell-abuse.ninja/feeds/dev-tools.atom.xml" rel="self"></link><id>https://shell-abuse.ninja/</id><updated>2015-05-17T14:47:00-06:00</updated><subtitle>Bending the shell to your whim - occasionally with abandon.</subtitle><entry><title>Getting to the root of your Git</title><link href="https://shell-abuse.ninja/getting-to-the-root-of-you-git.html" rel="alternate"></link><published>2015-05-17T14:47:00-06:00</published><updated>2015-05-17T14:47:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-17:/getting-to-the-root-of-you-git.html</id><summary type="html">&lt;p&gt;How to quickly cd to the root of your git&amp;nbsp;repository.&lt;/p&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; gcd &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="k"&gt;if&lt;/span&gt; which git &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-    &lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git status 2&amp;gt;/dev/null&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git status &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null&lt;span class="k"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -z &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
       &lt;span class="k"&gt;return&lt;/span&gt;
     &lt;span class="k"&gt;fi&lt;/span&gt;
@@ -15,7 +15,7 @@
 &lt;p&gt;Tab&amp;nbsp;completion!&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; _git_cd &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;which git &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-    &lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git status 2&amp;gt;/dev/null&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;git status &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null&lt;span class="k"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -z &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;STATUS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
       &lt;span class="k"&gt;return&lt;/span&gt;
     &lt;span class="k"&gt;fi&lt;/span&gt;
@@ -29,7 +29,7 @@
     &lt;span class="nv"&gt;opts&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="nv"&gt;$TARGET&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;compgen&lt;/span&gt; -d -o dirnames -S / -X &lt;span class="s1"&gt;&amp;#39;@(*/.git|*/.git/|.git|.git/)&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; * &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
       &lt;span class="nv"&gt;COMPREPLY&lt;/span&gt;&lt;span class="o"&gt;=(&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;compgen&lt;/span&gt; -W &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;opts&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -- &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="o"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;return&lt;/span&gt; 0
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
     &lt;span class="k"&gt;fi&lt;/span&gt;
   &lt;span class="k"&gt;fi&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
@@ -41,7 +41,7 @@
 mkdir -p a/b/c d/e/f
 &lt;span class="nb"&gt;cd&lt;/span&gt; a/b/c
 gcd d&amp;lt;TAB&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="git"></category><category term="bash"></category><category term="util"></category></entry><entry><title>Docker commands - the git way</title><link href="http://shell-abuse.ninja/docker-commands-the-git-way.html" rel="alternate"></link><published>2015-05-16T22:20:00-06:00</published><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-16:docker-commands-the-git-way.html</id><summary type="html">&lt;p&gt;Wouldn&amp;#8217;t it be nice if you could run &lt;code&gt;docker compose&lt;/code&gt; instead of &lt;code&gt;docker-compose&lt;/code&gt;? What about Docker Machine? You&amp;nbsp;can!&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="git"></category><category term="bash"></category><category term="util"></category></entry><entry><title>Docker commands - the git way</title><link href="https://shell-abuse.ninja/docker-commands-the-git-way.html" rel="alternate"></link><published>2015-05-16T22:20:00-06:00</published><updated>2015-05-16T22:20:00-06:00</updated><author><name>Matt Klich - Chief Abuser</name></author><id>tag:shell-abuse.ninja,2015-05-16:/docker-commands-the-git-way.html</id><summary type="html">&lt;p&gt;Wouldn&amp;#8217;t it be nice if you could run &lt;code&gt;docker compose&lt;/code&gt; instead of &lt;code&gt;docker-compose&lt;/code&gt;? What about Docker Machine? You&amp;nbsp;can!&lt;/p&gt;</summary><content type="html">&lt;p&gt;Wouldn&amp;#8217;t it be nice if you could run &lt;code&gt;docker compose&lt;/code&gt; instead of &lt;code&gt;docker-compose&lt;/code&gt;? What about Docker Machine? You&amp;nbsp;can!&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
   &lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;command&lt;/span&gt; -v docker-&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
   &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -n &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
@@ -58,16 +58,16 @@ gcd d&amp;lt;TAB&amp;gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker compose ps  &lt;span class="c1"&gt;# &amp;lt;-- instead of &amp;#39;docker-compose ps&amp;#39;&lt;/span&gt;
        Name                      Command               State                    Ports
 -------------------------------------------------------------------------------------------------------
-dockerghost_ghost_1   /entrypoint.sh npm start - ...   Up      2368/tcp
-dockerghost_nginx_1   /usr/bin/reefer -t /templa ...   Up      0.0.0.0:443-&amp;gt;443/tcp, 0.0.0.0:80-&amp;gt;80/tcp
+dockerghost_ghost_1   /entrypoint.sh npm start - ...   Up      &lt;span class="m"&gt;2368&lt;/span&gt;/tcp
+dockerghost_nginx_1   /usr/bin/reefer -t /templa ...   Up      &lt;span class="m"&gt;0&lt;/span&gt;.0.0.0:443-&amp;gt;443/tcp, &lt;span class="m"&gt;0&lt;/span&gt;.0.0.0:80-&amp;gt;80/tcp
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;hr /&gt;
+&lt;hr&gt;
 &lt;p&gt;Create your own commands - yours should be a little less&amp;nbsp;pointless.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Create a custom docker wrapper&lt;/span&gt;
 docker-foo &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; :: Hi there! ::&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;span class="c1"&gt;# And run it&lt;/span&gt;
 docker foo
  :: Hi there! ::
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="docker"></category><category term="git"></category></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="docker"></category><category term="git"></category></entry></feed>

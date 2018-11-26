@@ -4,273 +4,273 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>http://shell-abuse.ninja/</loc>
-<lastmod>2016-08-19T00:56:38-00:00</lastmod>
+<loc>https://shell-abuse.ninja/</loc>
+<lastmod>2018-11-26T00:39:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/archives.html</loc>
-<lastmod>2016-08-19T00:56:38-00:00</lastmod>
+<loc>https://shell-abuse.ninja/archives.html</loc>
+<lastmod>2018-11-26T00:39:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tags.html</loc>
-<lastmod>2016-08-19T00:56:38-00:00</lastmod>
+<loc>https://shell-abuse.ninja/tags.html</loc>
+<lastmod>2018-11-26T00:39:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/categories.html</loc>
-<lastmod>2016-08-19T00:56:38-00:00</lastmod>
+<loc>https://shell-abuse.ninja/categories.html</loc>
+<lastmod>2018-11-26T00:39:47-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/what-the-grok-regex-convertor.html</loc>
+<loc>https://shell-abuse.ninja/what-the-grok-regex-convertor.html</loc>
 <lastmod>2016-08-17T13:12:00-06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html</loc>
+<loc>https://shell-abuse.ninja/serial-over-lan-sol-javas-dead.html</loc>
 <lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html</loc>
+<loc>https://shell-abuse.ninja/capturing-and-filtering-sip_rtp-data-with-tshark.html</loc>
 <lastmod>2015-08-04T13:51:00-06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/getting-to-the-root-of-you-git.html</loc>
+<loc>https://shell-abuse.ninja/getting-to-the-root-of-you-git.html</loc>
 <lastmod>2015-05-17T14:47:00-06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/ip-address-associated-with-the-default-route.html</loc>
+<loc>https://shell-abuse.ninja/ip-address-associated-with-the-default-route.html</loc>
 <lastmod>2015-05-17T14:35:00-06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html</loc>
+<loc>https://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html</loc>
 <lastmod>2015-05-17T00:45:00-06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/docker-commands-the-git-way.html</loc>
+<loc>https://shell-abuse.ninja/docker-commands-the-git-way.html</loc>
 <lastmod>2015-05-16T22:20:00-06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/category/dev-tools.html</loc>
+<loc>https://shell-abuse.ninja/category/dev-tools.html</loc>
 <lastmod>2015-05-17T14:47:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/category/linux.html</loc>
+<loc>https://shell-abuse.ninja/category/linux.html</loc>
 <lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/category/osx.html</loc>
+<loc>https://shell-abuse.ninja/category/osx.html</loc>
 <lastmod>2015-05-17T00:45:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/category/regex.html</loc>
+<loc>https://shell-abuse.ninja/category/regex.html</loc>
 <lastmod>2016-08-17T13:12:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/osx.html</loc>
+<loc>https://shell-abuse.ninja/tag/osx.html</loc>
 <lastmod>2015-05-17T14:35:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/linux.html</loc>
+<loc>https://shell-abuse.ninja/tag/linux.html</loc>
 <lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/sol.html</loc>
+<loc>https://shell-abuse.ninja/tag/sol.html</loc>
 <lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/ifconfig.html</loc>
+<loc>https://shell-abuse.ninja/tag/ifconfig.html</loc>
 <lastmod>2015-05-17T14:35:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/serial-over-lan.html</loc>
+<loc>https://shell-abuse.ninja/tag/serial-over-lan.html</loc>
 <lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/hack.html</loc>
+<loc>https://shell-abuse.ninja/tag/hack.html</loc>
 <lastmod>2015-05-17T14:35:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/regex.html</loc>
+<loc>https://shell-abuse.ninja/tag/regex.html</loc>
 <lastmod>2016-08-17T13:12:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/sip.html</loc>
+<loc>https://shell-abuse.ninja/tag/sip.html</loc>
 <lastmod>2015-08-04T13:51:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/java.html</loc>
+<loc>https://shell-abuse.ninja/tag/java.html</loc>
 <lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/tshark.html</loc>
+<loc>https://shell-abuse.ninja/tag/tshark.html</loc>
 <lastmod>2015-08-04T13:51:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/ugly-hack.html</loc>
+<loc>https://shell-abuse.ninja/tag/ugly-hack.html</loc>
 <lastmod>2015-05-17T00:45:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/voip.html</loc>
+<loc>https://shell-abuse.ninja/tag/voip.html</loc>
 <lastmod>2015-08-04T13:51:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/wireshark.html</loc>
+<loc>https://shell-abuse.ninja/tag/wireshark.html</loc>
 <lastmod>2015-08-04T13:51:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/grok.html</loc>
+<loc>https://shell-abuse.ninja/tag/grok.html</loc>
 <lastmod>2016-08-17T13:12:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/python.html</loc>
+<loc>https://shell-abuse.ninja/tag/python.html</loc>
 <lastmod>2016-08-17T13:12:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/ipmi.html</loc>
+<loc>https://shell-abuse.ninja/tag/ipmi.html</loc>
 <lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/remote-console.html</loc>
+<loc>https://shell-abuse.ninja/tag/remote-console.html</loc>
 <lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/util.html</loc>
+<loc>https://shell-abuse.ninja/tag/util.html</loc>
 <lastmod>2015-05-17T14:47:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/git.html</loc>
+<loc>https://shell-abuse.ninja/tag/git.html</loc>
 <lastmod>2015-05-17T14:47:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/networking.html</loc>
+<loc>https://shell-abuse.ninja/tag/networking.html</loc>
 <lastmod>2015-08-04T13:51:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/bash.html</loc>
+<loc>https://shell-abuse.ninja/tag/bash.html</loc>
 <lastmod>2015-05-17T14:47:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/haproxy.html</loc>
+<loc>https://shell-abuse.ninja/tag/haproxy.html</loc>
 <lastmod>2016-08-17T13:12:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/tag/docker.html</loc>
+<loc>https://shell-abuse.ninja/tag/docker.html</loc>
 <lastmod>2015-05-16T22:20:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://shell-abuse.ninja/author/matt-klich-chief-abuser.html</loc>
+<loc>https://shell-abuse.ninja/author/matt-klich-chief-abuser.html</loc>
 <lastmod>2016-08-17T13:12:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>

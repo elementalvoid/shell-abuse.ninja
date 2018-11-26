@@ -2,24 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/stylesheet/style.min.css">
-
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="http://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
-
-
-    <link href="http://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
-
-
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="" />
+    <meta name="robots" content="" />
 
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://shell-abuse.ninja/theme/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="https://shell-abuse.ninja/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Shell Abuse Atom">
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57473144-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#333">
     <!-- Windows Phone -->
@@ -27,19 +38,22 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333">
 
 <meta name="author" content="Matt Klich - Chief Abuser" />
 <meta name="description" content="How to quickly cd to the root of your git repository." />
 <meta name="keywords" content="git, bash, util">
+
 <meta property="og:site_name" content="Shell Abuse"/>
 <meta property="og:title" content="Getting to the root of your Git"/>
 <meta property="og:description" content="How to quickly cd to the root of your git repository."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="http://shell-abuse.ninja/getting-to-the-root-of-you-git.html"/>
+<meta property="og:url" content="https://shell-abuse.ninja/getting-to-the-root-of-you-git.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2015-05-17 14:47:00-06:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="http://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
+<meta property="article:author" content="https://shell-abuse.ninja/author/matt-klich-chief-abuser.html">
 <meta property="article:section" content="Dev Tools"/>
 <meta property="article:tag" content="git"/>
 <meta property="article:tag" content="bash"/>
@@ -47,14 +61,15 @@
 <meta property="og:image" content="/images/elementalvoid-avatar.png">
 
   <title>Shell Abuse &ndash; Getting to the root of your Git</title>
+
 </head>
 <body>
   <aside>
     <div>
-      <a href="http://shell-abuse.ninja">
+      <a href="https://shell-abuse.ninja">
         <img src="/images/elementalvoid-avatar.png" alt="" title="">
       </a>
-      <h1><a href="http://shell-abuse.ninja"></a></h1>
+      <h1><a href="https://shell-abuse.ninja"></a></h1>
 
 <p>Bending the shell to your whim - occasionally with abandon.</p>
 
@@ -66,35 +81,41 @@
         <li><a class="sc-rss" href="//shell-abuse.ninja/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
       </ul>
     </div>
+
+
   </aside>
   <main>
+
     <nav>
-      <a href="http://shell-abuse.ninja">    Home
+      <a href="https://shell-abuse.ninja">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="http://shell-abuse.ninja/feeds/all.atom.xml">    Atom
+      <a href="https://shell-abuse.ninja/feeds/all.atom.xml">    Atom
 </a>
 
     </nav>
 
-<article>
+<article class="single">
   <header>
+      
     <h1 id="getting-to-the-root-of-you-git">Getting to the root of your&nbsp;Git</h1>
     <p>
-          Posted on Sun 17 May 2015 in <a href="http://shell-abuse.ninja/category/dev-tools.html">Dev Tools</a>
+          Posted on Sun 17 May 2015 in <a href="https://shell-abuse.ninja/category/dev-tools.html">Dev Tools</a>
 
 
         &#8226; 1 min read
     </p>
   </header>
+
+
   <div>
     <div class="highlight"><pre><span></span><span class="k">function</span> gcd <span class="o">{</span>
   <span class="k">if</span> which git <span class="p">&amp;</span>&gt; /dev/null<span class="p">;</span> <span class="k">then</span>
-    <span class="nv">STATUS</span><span class="o">=</span><span class="k">$(</span>git status 2&gt;/dev/null<span class="k">)</span>
+    <span class="nv">STATUS</span><span class="o">=</span><span class="k">$(</span>git status <span class="m">2</span>&gt;/dev/null<span class="k">)</span>
     <span class="k">if</span> <span class="o">[[</span> -z <span class="si">${</span><span class="nv">STATUS</span><span class="si">}</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
       <span class="k">return</span>
     <span class="k">fi</span>
@@ -108,7 +129,7 @@
 <p>Tab&nbsp;completion!</p>
 <div class="highlight"><pre><span></span><span class="k">function</span> _git_cd <span class="o">{</span>
   <span class="k">if</span> <span class="k">$(</span>which git <span class="p">&amp;</span>&gt; /dev/null<span class="k">)</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">STATUS</span><span class="o">=</span><span class="k">$(</span>git status 2&gt;/dev/null<span class="k">)</span>
+    <span class="nv">STATUS</span><span class="o">=</span><span class="k">$(</span>git status <span class="m">2</span>&gt;/dev/null<span class="k">)</span>
     <span class="k">if</span> <span class="o">[[</span> -z <span class="si">${</span><span class="nv">STATUS</span><span class="si">}</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
       <span class="k">return</span>
     <span class="k">fi</span>
@@ -122,7 +143,7 @@
     <span class="nv">opts</span><span class="o">=</span><span class="k">$(</span><span class="nb">cd</span> <span class="nv">$TARGET</span><span class="p">;</span> <span class="nb">compgen</span> -d -o dirnames -S / -X <span class="s1">&#39;@(*/.git|*/.git/|.git|.git/)&#39;</span> <span class="nv">$2</span><span class="k">)</span>
     <span class="k">if</span> <span class="o">[[</span> <span class="si">${</span><span class="nv">cur</span><span class="si">}</span> <span class="o">==</span> * <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
       <span class="nv">COMPREPLY</span><span class="o">=(</span> <span class="k">$(</span><span class="nb">compgen</span> -W <span class="s2">&quot;</span><span class="si">${</span><span class="nv">opts</span><span class="si">}</span><span class="s2">&quot;</span> -- <span class="si">${</span><span class="nv">cur</span><span class="si">}</span><span class="k">)</span> <span class="o">)</span>
-      <span class="k">return</span> 0
+      <span class="k">return</span> <span class="m">0</span>
     <span class="k">fi</span>
   <span class="k">fi</span>
 <span class="o">}</span>
@@ -138,22 +159,25 @@ gcd d&lt;TAB&gt;
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="http://shell-abuse.ninja/tag/git.html">git</a>
-      <a href="http://shell-abuse.ninja/tag/bash.html">bash</a>
-      <a href="http://shell-abuse.ninja/tag/util.html">util</a>
+      <a href="https://shell-abuse.ninja/tag/git.html">git</a>
+      <a href="https://shell-abuse.ninja/tag/bash.html">bash</a>
+      <a href="https://shell-abuse.ninja/tag/util.html">util</a>
     </p>
   </div>
+
 
 
   <div class="related-posts">
     <h4>    You might enjoy
 </h4>
     <ul class="related-posts">
-      <li><a href="http://shell-abuse.ninja/docker-commands-the-git-way.html">Docker commands - the git&nbsp;way</a></li>
-      <li><a href="http://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html">When <span class="caps">OSX</span> shebang won&#8217;t use Bash 4 from&nbsp;brew</a></li>
+      <li><a href="https://shell-abuse.ninja/when-osx-shebang-wont-use-bash-4.html">When <span class="caps">OSX</span> shebang won&#8217;t use Bash 4 from&nbsp;brew</a></li>
+      <li><a href="https://shell-abuse.ninja/docker-commands-the-git-way.html">Docker commands - the git&nbsp;way</a></li>
     </ul>
   </div>
 
+
+<!-- Disqus -->
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'shellabuse';
@@ -167,25 +191,15 @@ gcd d&lt;TAB&gt;
         Please enable JavaScript to view comments.
 
 </noscript>
+<!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy; Matt Klich - Chief Abuser </p>
+<p>&copy;  </p>
 <p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
 </p>    </footer>
   </main>
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-57473144-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
 
 
 
@@ -194,10 +208,11 @@ gcd d&lt;TAB&gt;
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Shell Abuse ",
-  "url" : "http://shell-abuse.ninja",
+  "url" : "https://shell-abuse.ninja",
   "image": "/images/elementalvoid-avatar.png",
   "description": ""
 }
 </script>
+
 </body>
 </html>
