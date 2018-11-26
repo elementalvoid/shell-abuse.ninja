@@ -10,7 +10,7 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'http://shell-abuse.ninja'
+SITEURL = 'https://shell-abuse.ninja'
 RELATIVE_URLS = False
 
 FEED_DOMAIN = SITEURL
