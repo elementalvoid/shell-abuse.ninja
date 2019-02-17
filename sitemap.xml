@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://shell-abuse.ninja/</loc>
-<lastmod>2018-11-26T00:39:47-00:00</lastmod>
+<lastmod>2019-02-17T15:34:36-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://shell-abuse.ninja/archives.html</loc>
-<lastmod>2018-11-26T00:39:47-00:00</lastmod>
+<lastmod>2019-02-17T15:34:36-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://shell-abuse.ninja/tags.html</loc>
-<lastmod>2018-11-26T00:39:47-00:00</lastmod>
+<lastmod>2019-02-17T15:34:36-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://shell-abuse.ninja/categories.html</loc>
-<lastmod>2018-11-26T00:39:47-00:00</lastmod>
+<lastmod>2019-02-17T15:34:36-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://shell-abuse.ninja/tls-pki-wtf-is-a-ca.html</loc>
+<lastmod>2019-02-17T14:36:00-07:00</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -88,6 +95,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://shell-abuse.ninja/category/encryption.html</loc>
+<lastmod>2019-02-17T14:36:00-07:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://shell-abuse.ninja/category/linux.html</loc>
 <lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>daily</changefreq>
@@ -116,8 +130,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://shell-abuse.ninja/tag/linux.html</loc>
-<lastmod>2016-02-03T16:27:00-07:00</lastmod>
+<loc>https://shell-abuse.ninja/tag/hack.html</loc>
+<lastmod>2015-05-17T14:35:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -144,8 +158,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://shell-abuse.ninja/tag/hack.html</loc>
-<lastmod>2015-05-17T14:35:00-07:00</lastmod>
+<loc>https://shell-abuse.ninja/tag/linux.html</loc>
+<lastmod>2016-02-03T16:27:00-07:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://shell-abuse.ninja/tag/pki.html</loc>
+<lastmod>2019-02-17T14:36:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -165,8 +186,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://shell-abuse.ninja/tag/java.html</loc>
-<lastmod>2016-02-03T16:27:00-07:00</lastmod>
+<loc>https://shell-abuse.ninja/tag/networking.html</loc>
+<lastmod>2019-02-17T14:36:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -174,6 +195,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://shell-abuse.ninja/tag/tshark.html</loc>
 <lastmod>2015-08-04T13:51:00-07:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://shell-abuse.ninja/tag/encryption.html</loc>
+<lastmod>2019-02-17T14:36:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -193,6 +221,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://shell-abuse.ninja/tag/haproxy.html</loc>
+<lastmod>2016-08-17T13:12:00-07:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://shell-abuse.ninja/tag/wireshark.html</loc>
 <lastmod>2015-08-04T13:51:00-07:00</lastmod>
 <changefreq>daily</changefreq>
@@ -202,6 +237,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://shell-abuse.ninja/tag/grok.html</loc>
 <lastmod>2016-08-17T13:12:00-07:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://shell-abuse.ninja/tag/cryptography.html</loc>
+<lastmod>2019-02-17T14:36:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -235,6 +277,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://shell-abuse.ninja/tag/ssl.html</loc>
+<lastmod>2019-02-17T14:36:00-07:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://shell-abuse.ninja/tag/git.html</loc>
 <lastmod>2015-05-17T14:47:00-07:00</lastmod>
 <changefreq>daily</changefreq>
@@ -242,8 +291,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://shell-abuse.ninja/tag/networking.html</loc>
-<lastmod>2015-08-04T13:51:00-07:00</lastmod>
+<loc>https://shell-abuse.ninja/tag/java.html</loc>
+<lastmod>2016-02-03T16:27:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -256,8 +305,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://shell-abuse.ninja/tag/haproxy.html</loc>
-<lastmod>2016-08-17T13:12:00-07:00</lastmod>
+<loc>https://shell-abuse.ninja/tag/tls.html</loc>
+<lastmod>2019-02-17T14:36:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -271,7 +320,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://shell-abuse.ninja/author/matt-klich-chief-abuser.html</loc>
-<lastmod>2016-08-17T13:12:00-07:00</lastmod>
+<lastmod>2019-02-17T14:36:00-07:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
