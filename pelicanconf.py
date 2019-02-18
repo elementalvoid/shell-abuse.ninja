@@ -64,7 +64,6 @@ SOCIAL = (
     ('linkedin', 'https://www.linkedin.com/in/mattklich'),
     ('github', 'https://github.com/elementalvoid'),
     ('stack-overflow', 'http://stackoverflow.com/users/436190/elementalvoid'),
-    ('google', 'https://google.com/+MattKlich'),
     ('rss', '//shell-abuse.ninja/feeds/all.atom.xml')
 )
 
